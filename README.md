@@ -6,11 +6,11 @@
 
 ### Core
 
-- User can post an item that they want to track the price
-- User can choose which channel they want to track (Ex. Amazon.com or a Facebook trading group suggest by the App)
-- The app can grab information from API know the price history 
-- The app will notice user when one of the channel detect a product that meet the user need (by price or location)
-- The app can provide the information (link) for user to interact with the actual product provider
+- User can post an item that they want to track the price.
+- User can choose which channel they want to track (Ex. Amazon.com or a Facebook trading group suggest by the App).
+- The app can grab information from API to know the current price of each channel.
+- The app will notice user when one of the channel detect a product that meet the user need (by price or location).
+- The app can provide the information (link) for user to interact with the actual product provider.
 
 ### Additional
 
