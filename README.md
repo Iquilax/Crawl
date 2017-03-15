@@ -6,11 +6,16 @@
 
 ### Core
 
-
+- User can post an item that they want to track the price
+- User can choose which channel they want to track (Ex. Amazon.com or a Facebook trading group suggest by the App)
+- The app can grab information from API know the price history 
+- The app will notice user when one of the channel detect a product that meet the user need (by price or location)
+- The app can provide the information (link) for user to interact with the actual product provider
 
 ### Additional
 
-
+- The app record and show statistic about the price change in each tracking channel
+- Allow user to filter product more "smart" by using Natural language processing to filter the product
 
 ## Video Walkthrough
 
@@ -27,15 +32,12 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Open-source libraries used
 
 - [Gson](https://github.com/google/gson) - Java serialization/deserialization library for converting JSON objects to Java objects and vice versa
-- [DBFlow](https://github.com/Raizlabs/DBFlow) - Object-relational mapper (ORM) for Android
-- [Retrolambda](https://github.com/evant/gradle-retrolambda) - Enable lambda expressions and method references for Java < 8
-- [Stetho](http://facebook.github.io/stetho/) - Chrome-based Android debugging bridge
 - [EventBus](http://greenrobot.org/eventbus/) - Pass events between Android application components
 
 
 ## License
 
-    Copyright 2017 Hùng Nguyễn, Phong Nguyen Thanh, Daniel Weibel
+    Copyright 2017 
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
