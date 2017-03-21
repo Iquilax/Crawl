@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "907201675905",
+    "firebase_url": "https://trakky-d5c00.firebaseio.com",
+    "project_id": "trakky-d5c00",
+    "storage_bucket": "trakky-d5c00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907201675905:android:7a4a591a5f3fe6a8",
+        "android_client_info": {
+          "package_name": "com.iwlac.tracky"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907201675905-ot3346lr7rgucbavnjgt4fgc12tcaboq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsMwrP9IlrbN4BA3Arf0Rv0Qnj5R4pzIQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
