@@ -1,4 +1,4 @@
-package com.iwlac.tracky;
+package com.iwlac.tracky.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,6 +23,8 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
+import com.iwlac.tracky.ProductClickListener;
+import com.iwlac.tracky.R;
 import com.iwlac.tracky.activity.ProductDetailActivity;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
 

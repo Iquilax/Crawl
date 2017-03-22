@@ -12,7 +12,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.iwlac.tracky.MainActivity;
+import com.iwlac.tracky.activity.MainActivity;
 import com.iwlac.tracky.R;
 
 /**

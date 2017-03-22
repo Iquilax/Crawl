@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.iwlac.tracky.fragments.BrowseProductFragment;
-import com.iwlac.tracky.fragments.HotProductFragment;
-import com.iwlac.tracky.fragments.TrackedProductFragment;
+import com.iwlac.tracky.fragment.BrowseProductFragment;
+import com.iwlac.tracky.fragment.HotProductFragment;
+import com.iwlac.tracky.fragment.TrackedProductFragment;
 
 /**
  * Created by buupv on 3/22/17.

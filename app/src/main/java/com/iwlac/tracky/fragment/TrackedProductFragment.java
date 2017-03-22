@@ -1,10 +1,9 @@
-package com.iwlac.tracky.fragments;
+package com.iwlac.tracky.fragment;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.iwlac.tracky.PriceCompareActivity;
+import com.iwlac.tracky.activity.PriceCompareActivity;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;

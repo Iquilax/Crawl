@@ -1,4 +1,4 @@
-package com.iwlac.tracky.fragments;
+package com.iwlac.tracky.fragment;
 
 
 import android.os.Bundle;

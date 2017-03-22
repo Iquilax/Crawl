@@ -4,7 +4,7 @@
     android:id="@+id/activity_price_compare"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iwlac.tracky.PriceCompareActivity">
+    tools:context="com.iwlac.tracky.activity.PriceCompareActivity">
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"

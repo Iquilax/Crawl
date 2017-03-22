@@ -24,7 +24,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +38,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".PriceCompareActivity"></activity>
+        <activity android:name=".activity.PriceCompareActivity"></activity>
         <activity android:name=".activity.ProductDetailActivity">
 
         </activity>
