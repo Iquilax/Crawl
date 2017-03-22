@@ -39,6 +39,9 @@
         </service>
 
         <activity android:name=".PriceCompareActivity"></activity>
+        <activity android:name=".activity.ProductDetailActivity">
+
+        </activity>
     </application>
 
 </manifest>

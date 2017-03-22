@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
+import com.iwlac.tracky.activity.ProductDetailActivity;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class PriceCompareActivity extends AppCompatActivity {
         adapter = new TrackedProductAdapter(names, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Intent i = new Intent(getBaseContext(), PriceCompareActivity.class);
+                Intent i = new Intent(getBaseContext(), ProductDetailActivity.class);
                 startActivity(i);
             }
         });
