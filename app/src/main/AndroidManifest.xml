@@ -38,10 +38,9 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activity.PriceCompareActivity"></activity>
-        <activity android:name=".activity.ProductDetailActivity">
-
-        </activity>
+        <activity android:name=".activity.PriceCompareActivity" />
+        <activity android:name=".activity.ProductDetailActivity"></activity>
+        <activity android:name=".activity.BaseActivity"></activity>
     </application>
 
 </manifest>
