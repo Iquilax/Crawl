@@ -52,7 +52,7 @@
 
         <service
             android:name=".firebasemanager.backgroundservice.TrackyRSPullService"
-            android:exported="false"/>
+            android:exported="false" />
 
         <activity android:name=".activity.PriceCompareActivity" />
         <activity android:name=".activity.ProductDetailActivity"></activity>

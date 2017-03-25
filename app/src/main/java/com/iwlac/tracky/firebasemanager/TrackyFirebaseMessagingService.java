@@ -31,6 +31,7 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            sendNotification(remoteMessage.getData().get("message"));
         }
 
         // Check if message contains a notification payload.
@@ -38,6 +39,11 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             sendNotification(remoteMessage.getNotification().getBody());
         }
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
     }
 
     @Override
