@@ -13,7 +13,6 @@ import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.models.TrackedProduct;
 import com.iwlac.tracky.models.Trade;
-import com.iwlac.tracky.utility.GlideHelper;
 
 import org.w3c.dom.Text;
 

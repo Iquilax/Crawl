@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.utility.MessageString;
-import com.iwlac.tracky.utility.GlideHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,8 +46,6 @@ public class ProductDetailFragment extends Fragment implements Button.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GlideHelper.getInstance(this.getContext());
-
 
         Log.d("Test", "onCreate");
         //call API to get product detail
@@ -60,7 +58,7 @@ public class ProductDetailFragment extends Fragment implements Button.OnClickLis
         View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
         ButterKnife.bind(this, view);
         tvProductPrice.setText("490$");
-        GlideHelper.loadImageToView("http://www.fusible.net/image/upload/minh.bt/2016/5/7/312/312_GrJ4Pw682c.jpg", ivProductImage);
+        loadImageToView("http://www.fusible.net/image/upload/minh.bt/2016/5/7/312/312_GrJ4Pw682c.jpg", ivProductImage);
         btnTrack.setOnClickListener(this);
         Log.d("Test", "onCreateView");
         return view;
@@ -76,5 +74,9 @@ public class ProductDetailFragment extends Fragment implements Button.OnClickLis
                 Toast.makeText(this.getActivity(), MessageString.UNEXPECTED_ERROR, Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void loadImageToView(String imgUrl, ImageView view){
+        Glide.with(getContext()).load(imgUrl).into(view);
     }
 }

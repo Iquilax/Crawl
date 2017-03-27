@@ -43,6 +43,7 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'com.github.arturogutierrez:badges:1.0.5@aar'
 
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

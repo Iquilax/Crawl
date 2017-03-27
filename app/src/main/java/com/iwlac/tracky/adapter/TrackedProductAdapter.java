@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.models.TrackedProduct;
-import com.iwlac.tracky.utility.GlideHelper;
 
 import java.util.List;
 
@@ -61,8 +60,8 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private void configureTrackedProductViewHolder(TrackedProductViewHolder viewHolder, int position) {
         TrackedProduct item = listTrackedProduct.get(position);
         viewHolder.tvName.setText(item.getTitle());
-        GlideHelper.getInstance(context);
-        GlideHelper.loadImageToView("",viewHolder.imThumbnail);
+//        GlideHelper.getInstance(context);
+//        GlideHelper.loadImageToView("",viewHolder.imThumbnail);
         viewHolder.tvPrice.setText(item.getUpdates().size() + "");
         viewHolder.btnTrack.setOnClickListener(new View.OnClickListener() {
             @Override

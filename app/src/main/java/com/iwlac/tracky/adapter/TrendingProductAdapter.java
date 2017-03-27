@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.firebasemanager.Database;
 import com.iwlac.tracky.models.TrackedProduct;
-import com.iwlac.tracky.utility.GlideHelper;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             @Override
             public void onClick(View v) {
 //                Snackbar.make(v,"Tracked",Snackbar.LENGTH_LONG).show();
-                Database.track("buu",item.getId(),10000);
+                Database.track(FirebaseInstanceId.getInstance().getToken(),item.getId(),10000);
             }
         });
     }
