@@ -13,10 +13,20 @@ public class Trade {
     String trackedPlaces;
     String url;
     double price;
+    String description;
     String lastUpdate;
+    String fullPicture;
     String id;
 
     public Trade() {
+    }
+
+    public String getFullPicture() {
+        return fullPicture;
+    }
+
+    public void setFullPicture(String fullPicture) {
+        this.fullPicture = fullPicture;
     }
 
     public String getTrackedPlaces() {
@@ -37,6 +47,14 @@ public class Trade {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setPrice(double price) {

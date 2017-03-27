@@ -35,13 +35,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_horizontal|bottom"
+                    android:gravity="center"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/tvName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="sdasdas"
+                        android:textSize="20dp"
                         android:textAllCaps="true"
                         android:textStyle="bold" />
                     <TextView
@@ -60,20 +61,24 @@
 
                     <LinearLayout
                         android:orientation="horizontal"
+                        android:gravity="end"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <Button
-                            android:id="@+id/btnTrack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Share" />
-
-                        <Button
-                            android:id="@+id/btnShare"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Track Now" />
+                        <!--<android.support.design.widget.FloatingActionButton-->
+                            <!--android:id="@+id/btnTrack"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:src="@drawable/ic_share_black_48dp"-->
+                            <!--android:layout_marginLeft="10dp"-->
+                            <!--android:layout_marginRight="10dp"-->
+                            <!--/>-->
+                        <!--<android.support.design.widget.FloatingActionButton-->
+                            <!--android:id="@+id/btnShare"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:src="@drawable/ic_remove_red_eye_black_48dp"-->
+                            <!--/>-->
                     </LinearLayout>
 
                 </LinearLayout>

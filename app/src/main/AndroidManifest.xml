@@ -2,12 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iwlac.tracky">
 
-   
     <!-- Requires this permission to download RSS data from Picasa -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Requires this permission to check the network state       -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- Requires this permission to check the network state -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Samsung -->
     <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
@@ -19,6 +18,7 @@
     <!-- HTC -->
     <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -54,13 +54,11 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".firebasemanager.TrackFirebaseInstanceIDService">
+        <service android:name=".firebasemanager.TrackFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".firebasemanager.backgroundservice.TrackyRSPullService"
             android:exported="false" />
@@ -68,7 +66,8 @@
         <activity android:name=".activity.PriceCompareActivity" />
         <activity android:name=".activity.ProductDetailActivity" />
         <activity android:name=".activity.BaseActivity" />
-        <activity android:name=".activity.WebDirectingActivity"></activity>
+        <activity android:name=".activity.WebDirectingActivity" />
+        <activity android:name=".activity.TrackActivity"></activity>
     </application>
 
 </manifest>

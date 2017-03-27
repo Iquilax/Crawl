@@ -26,7 +26,7 @@ public class HomePageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return HotProductFragment.newInstance();
+                return TrackedProductFragment.newInstance();
             case 1:
                 return HotProductFragment.newInstance();
             case 2:

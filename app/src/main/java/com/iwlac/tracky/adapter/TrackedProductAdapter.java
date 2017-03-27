@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
+import com.iwlac.tracky.models.TrackedAttempt;
 import com.iwlac.tracky.models.TrackedProduct;
 
 import java.util.List;
@@ -23,11 +24,11 @@ import butterknife.ButterKnife;
  */
 
 public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<TrackedProduct> listTrackedProduct;
+    private List<TrackedAttempt> listTrackedProduct;
     private Context context;
     private ProductClickListener listener;
 
-    public TrackedProductAdapter(List<TrackedProduct> listTrackedProduct,ProductClickListener listener) {
+    public TrackedProductAdapter(List<TrackedAttempt> listTrackedProduct,ProductClickListener listener) {
         this.listTrackedProduct = listTrackedProduct;
         this.listener = listener;
     }
@@ -58,17 +59,9 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     private void configureTrackedProductViewHolder(TrackedProductViewHolder viewHolder, int position) {
-        TrackedProduct item = listTrackedProduct.get(position);
-        viewHolder.tvName.setText(item.getTitle());
-//        GlideHelper.getInstance(context);
-//        GlideHelper.loadImageToView("",viewHolder.imThumbnail);
-        viewHolder.tvPrice.setText(item.getUpdates().size() + "");
-        viewHolder.btnTrack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,"Tracked",Snackbar.LENGTH_LONG).show();
-            }
-        });
+        TrackedAttempt item = listTrackedProduct.get(position);
+        viewHolder.tvTitle.setText(item.getId());
+        viewHolder.tvPrice.setText(item.getPrice() + "");
     }
 
     @Override
@@ -76,7 +69,7 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return listTrackedProduct.size();
     }
 
-    public void add(TrackedProduct name) {
+    public void add(TrackedAttempt name) {
         listTrackedProduct.add(name);
         this.notifyDataSetChanged();
     }
@@ -87,14 +80,12 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public class TrackedProductViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.tvName)
-        TextView tvName;
-        @BindView(R.id.imThumbnail)
-        ImageView imThumbnail;
+        @BindView(R.id.tvTitle)
+        TextView tvTitle;
+        @BindView(R.id.imLogo)
+        ImageView imLogo;
         @BindView(R.id.tvPrice)
         TextView tvPrice;
-        @BindView(R.id.btnTrack)
-        TextView btnTrack;
 
         public TrackedProductViewHolder(View itemView) {
             super(itemView);

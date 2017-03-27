@@ -1,7 +1,9 @@
 package com.iwlac.tracky.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -16,18 +18,22 @@ import android.widget.Toast;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.activity.PriceCompareActivity;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
 import com.iwlac.tracky.adapter.TradeAdapter;
 import com.iwlac.tracky.firebasemanager.Database;
+import com.iwlac.tracky.models.TrackedAttempt;
 import com.iwlac.tracky.models.TrackedProduct;
 import com.iwlac.tracky.models.Trade;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,8 +46,8 @@ public class TrackedProductFragment extends Fragment {
     RecyclerView rvTrackedProduct;
 
     LinearLayoutManager linearLayoutManager;
-    TradeAdapter adapter;
-    List<Trade> tradeList = new ArrayList<>();
+    TrackedProductAdapter adapter;
+    List<TrackedAttempt> tradeList = new ArrayList<>();
 
     public TrackedProductFragment() {
         // Required empty public constructor
@@ -62,7 +68,7 @@ public class TrackedProductFragment extends Fragment {
         ButterKnife.bind(this,view);
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rvTrackedProduct.setLayoutManager(linearLayoutManager);
-        adapter = new TradeAdapter(tradeList, new ProductClickListener() {
+        adapter = new TrackedProductAdapter(tradeList, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getContext(), PriceCompareActivity.class);
@@ -70,18 +76,24 @@ public class TrackedProductFragment extends Fragment {
             }
         });
         rvTrackedProduct.setAdapter(adapter);
+
         setUpFirebaseListener();
         return view;
     }
     private void setUpFirebaseListener(){
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        final Set<String> trackList = sharedPref.getStringSet("TRACKED", new HashSet<String>());
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
-                TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
-                for (Map.Entry<String,Trade> item : product.getUpdates().entrySet()) {
-                    adapter.add(item.getValue());
+                if (trackList.contains(dataSnapshot.getKey())){
+                    TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
+                    int position = product.getTrackedAttempses().indexOf(FirebaseInstanceId.getInstance().getToken());
+                    adapter.add(product.getTrackedAttempses().get(position));
                 }
+
 
             }
 

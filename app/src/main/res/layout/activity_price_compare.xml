@@ -59,12 +59,13 @@
             android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.NestedScrollView>
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_margin="@dimen/activity_horizontal_margin"-->
-        <!--android:src="@drawable/ic_stat_ic_notification"-->
-        <!--app:layout_anchor="@id/main.appbar"-->
-        <!--app:layout_anchorGravity="bottom|right|end"-->
-        <!--/>-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnTrack"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_remove_red_eye_black_48dp"
+        app:layout_anchor="@id/main.appbar"
+        app:layout_anchorGravity="bottom|right|end"
+        />
 </android.support.design.widget.CoordinatorLayout>

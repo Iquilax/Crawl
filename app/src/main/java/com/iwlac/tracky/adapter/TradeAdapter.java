@@ -62,8 +62,9 @@ public class TradeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private void configureTradeViewHolder(TradeAdapter.TradeViewHolder viewHolder, int position) {
         Trade item = listTrackedProduct.get(position);
+        viewHolder.tvTitle.setText(item.getDescription());
+        viewHolder.tvPrice.setText(String.format("%1$,.0f", item.getPrice()) + "₫");
         viewHolder.tvChannel.setText(item.getTrackedPlaces());
-        viewHolder.tvPrice.setText("$" + item.getPrice());
     }
 
     @Override
@@ -90,6 +91,8 @@ public class TradeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         TextView tvChannel;
         @BindView(R.id.tvPrice)
         TextView tvPrice;
+        @BindView(R.id.tvTitle)
+        TextView tvTitle;
 
         public TradeViewHolder(View itemView) {
             super(itemView);

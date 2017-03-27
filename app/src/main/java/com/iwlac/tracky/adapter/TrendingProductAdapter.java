@@ -1,6 +1,7 @@
 package com.iwlac.tracky.adapter;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,12 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.firebasemanager.Database;
 import com.iwlac.tracky.models.TrackedProduct;
+import com.iwlac.tracky.models.Trade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -62,16 +66,10 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void configureTrackedProductViewHolder(final TrendingProductViewHolder viewHolder, int position) {
         final TrackedProduct item = listTrackedProduct.get(position);
         viewHolder.tvName.setText(item.getTitle());
-//        GlideHelper.getInstance(context);
-//        GlideHelper.loadImageToView("",viewHolder.imThumbnail);
-        viewHolder.tvPrice.setText("$" + item.getUpdates().size());
-        viewHolder.btnTrack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Snackbar.make(v,"Tracked",Snackbar.LENGTH_LONG).show();
-                Database.track(FirebaseInstanceId.getInstance().getToken(),item.getId(),10000);
-            }
-        });
+        List<Trade> trades = new ArrayList<>(item.getUpdates().values());
+        viewHolder.tvPrice.setText(String.format("%1$,.0f", trades.get(0).getPrice())+ "₫");
+        Glide.with(context).load(trades.get(0).getFullPicture()).into(viewHolder.imThumbnail);
+
     }
 
     @Override
@@ -100,8 +98,6 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         ImageView imThumbnail;
         @BindView(R.id.tvPrice)
         TextView tvPrice;
-        @BindView(R.id.btnTrack)
-        TextView btnTrack;
 
 
         public TrendingProductViewHolder(View itemView) {

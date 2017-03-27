@@ -5,21 +5,30 @@
     android:padding="8dp">
 
     <TextView
-
-        android:id="@+id/tvChannel"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Card"
-        android:textStyle="bold" />
+        android:text="Hello Card"/>
 
     <TextView
-        android:layout_alignParentEnd="true"
         android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:text="Hello Card"
-        android:textStyle="bold"
-        android:layout_alignParentRight="true" />
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvChannel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tvPrice"
+        android:text="Hello Card" />
 
 
 </RelativeLayout>

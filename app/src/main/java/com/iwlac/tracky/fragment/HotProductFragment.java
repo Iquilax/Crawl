@@ -67,6 +67,7 @@ public class HotProductFragment extends Fragment {
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getContext(), PriceCompareActivity.class);
                 i.putExtra("Updates", Parcels.wrap(productList.get(position).getUpdates()));
+                i.putExtra("ItemId", productList.get(position).getId());
                 startActivity(i);
             }
         });
