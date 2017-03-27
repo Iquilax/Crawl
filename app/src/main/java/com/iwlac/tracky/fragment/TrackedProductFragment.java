@@ -7,17 +7,27 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.iwlac.tracky.activity.PriceCompareActivity;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
+import com.iwlac.tracky.adapter.TradeAdapter;
+import com.iwlac.tracky.firebasemanager.Database;
+import com.iwlac.tracky.models.TrackedProduct;
+import com.iwlac.tracky.models.Trade;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,8 +40,8 @@ public class TrackedProductFragment extends Fragment {
     RecyclerView rvTrackedProduct;
 
     LinearLayoutManager linearLayoutManager;
-    TrackedProductAdapter adapter;
-    List<String> names;
+    TradeAdapter adapter;
+    List<Trade> tradeList = new ArrayList<>();
 
     public TrackedProductFragment() {
         // Required empty public constructor
@@ -52,11 +62,7 @@ public class TrackedProductFragment extends Fragment {
         ButterKnife.bind(this,view);
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rvTrackedProduct.setLayoutManager(linearLayoutManager);
-        names = new ArrayList<>();
-        names.add("Iphone 6");
-        names.add("Macbook Pro 13inch Grey");
-        names.add("Nexus 6XXX");
-        adapter = new TrackedProductAdapter(names, new ProductClickListener() {
+        adapter = new TradeAdapter(tradeList, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getContext(), PriceCompareActivity.class);
@@ -64,11 +70,63 @@ public class TrackedProductFragment extends Fragment {
             }
         });
         rvTrackedProduct.setAdapter(adapter);
-
-        rvTrackedProduct.addItemDecoration(new DividerItemDecoration(rvTrackedProduct.getContext(), DividerItemDecoration.VERTICAL));
-
-
+        setUpFirebaseListener();
         return view;
+    }
+    private void setUpFirebaseListener(){
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
+                TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
+                for (Map.Entry<String,Trade> item : product.getUpdates().entrySet()) {
+                    adapter.add(item.getValue());
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+                Log.d("Buu", "onChildChanged:" + dataSnapshot.getKey());
+
+                // A comment has changed, use the key to determine if we are displaying this
+                // comment and if so displayed the changed comment.
+                TrackedProduct newComment = dataSnapshot.getValue(TrackedProduct.class);
+                String commentKey = dataSnapshot.getKey();
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Log.d("Buu", "onChildRemoved:" + dataSnapshot.getKey());
+
+                // A comment has changed, use the key to determine if we are displaying this
+                // comment and if so remove it.
+                String commentKey = dataSnapshot.getKey();
+
+                // ...
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+                Log.d("BUU", "onChildMoved:" + dataSnapshot.getKey());
+
+                // A comment has changed position, use the key to determine if we are
+                // displaying this comment and if so move it.
+                TrackedProduct movedComment = dataSnapshot.getValue(TrackedProduct.class);
+                String commentKey = dataSnapshot.getKey();
+
+                // ...
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Buu", "postComments:onCancelled", databaseError.toException());
+                Toast.makeText(getContext(), "Failed to load comments.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+        Database.getReference().addChildEventListener(childEventListener);
     }
 
 }

@@ -12,7 +12,10 @@ import android.widget.TextView;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.models.TrackedProduct;
+import com.iwlac.tracky.models.Trade;
 import com.iwlac.tracky.utility.GlideHelper;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -20,15 +23,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by buupv on 3/22/17.
+ * Created by buupv on 3/26/17.
  */
 
-public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<TrackedProduct> listTrackedProduct;
+public class TradeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<Trade> listTrackedProduct;
     private Context context;
     private ProductClickListener listener;
 
-    public TrackedProductAdapter(List<TrackedProduct> listTrackedProduct,ProductClickListener listener) {
+    public TradeAdapter(List<Trade> listTrackedProduct, ProductClickListener listener) {
         this.listTrackedProduct = listTrackedProduct;
         this.listener = listener;
     }
@@ -39,10 +42,10 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View view = inflater.inflate(R.layout.tracked_product, parent, false);
+        View view = inflater.inflate(R.layout.trade_item, parent, false);
 
         // Return a new holder instance
-        final TrackedProductViewHolder viewHolder = new TrackedProductViewHolder(view);
+        final TradeAdapter.TradeViewHolder viewHolder = new TradeAdapter.TradeViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,22 +57,14 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        TrackedProductViewHolder viewHolder = (TrackedProductViewHolder) holder;
-        configureTrackedProductViewHolder(viewHolder, position);
+        TradeAdapter.TradeViewHolder viewHolder = (TradeAdapter.TradeViewHolder) holder;
+        configureTradeViewHolder(viewHolder, position);
     }
 
-    private void configureTrackedProductViewHolder(TrackedProductViewHolder viewHolder, int position) {
-        TrackedProduct item = listTrackedProduct.get(position);
-        viewHolder.tvName.setText(item.getTitle());
-        GlideHelper.getInstance(context);
-        GlideHelper.loadImageToView("",viewHolder.imThumbnail);
-        viewHolder.tvPrice.setText(item.getUpdates().size() + "");
-        viewHolder.btnTrack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,"Tracked",Snackbar.LENGTH_LONG).show();
-            }
-        });
+    private void configureTradeViewHolder(TradeAdapter.TradeViewHolder viewHolder, int position) {
+        Trade item = listTrackedProduct.get(position);
+        viewHolder.tvChannel.setText(item.getTrackedPlaces());
+        viewHolder.tvPrice.setText("$" + item.getPrice());
     }
 
     @Override
@@ -77,8 +72,12 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return listTrackedProduct.size();
     }
 
-    public void add(TrackedProduct name) {
+    public void add(Trade name) {
         listTrackedProduct.add(name);
+        this.notifyDataSetChanged();
+    }
+    public void addAll(List<Trade> name) {
+        listTrackedProduct.addAll(name);
         this.notifyDataSetChanged();
     }
 
@@ -87,19 +86,15 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.notifyDataSetChanged();
     }
 
-    public class TrackedProductViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.tvName)
-        TextView tvName;
-        @BindView(R.id.imThumbnail)
-        ImageView imThumbnail;
+    public class TradeViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tvChannel)
+        TextView tvChannel;
         @BindView(R.id.tvPrice)
         TextView tvPrice;
-        @BindView(R.id.btnTrack)
-        TextView btnTrack;
 
-        public TrackedProductViewHolder(View itemView) {
+        public TradeViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 

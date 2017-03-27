@@ -15,7 +15,6 @@ import com.iwlac.tracky.fragment.TrackedProductFragment;
 
 public class HomePageAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[]{"Tracked", "Hot", "Browse"};
     private Context context;
 
     public HomePageAdapter(FragmentManager fm,Context context) {
@@ -27,7 +26,7 @@ public class HomePageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return TrackedProductFragment.newInstance();
+                return HotProductFragment.newInstance();
             case 1:
                 return HotProductFragment.newInstance();
             case 2:
@@ -42,9 +41,4 @@ public class HomePageAdapter extends FragmentPagerAdapter {
         return PAGE_COUNT;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
-        return tabTitles[position];
-    }
 }

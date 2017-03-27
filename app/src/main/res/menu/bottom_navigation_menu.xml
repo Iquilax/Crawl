@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:title="@string/nav_tracked"
-        android:icon="@drawable/ic_maps_local_attraction" />
+        android:icon="@drawable/ic_remove_red_eye_black_48dp" />
 
     <item
         android:title="@string/nav_hot"
-        android:icon="@drawable/ic_maps_local_bar" />
+        android:icon="@drawable/ic_whatshot_black_48dp" />
 
     <item
         android:title="@string/nav_browse"
-        android:icon="@drawable/ic_maps_local_restaurant" />
+        android:icon="@drawable/ic_youtube_searched_for_black_48dp" />
 
 </menu>
