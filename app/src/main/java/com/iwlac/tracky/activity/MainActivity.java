@@ -1,6 +1,7 @@
 package com.iwlac.tracky.activity;
 
 import android.animation.Animator;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -26,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.HomePageAdapter;
 import com.iwlac.tracky.firebasemanager.Database;
+import com.iwlac.tracky.manager.sharedpreference.TrackySharedPreferencesManager;
 import com.iwlac.tracky.models.Products;
 import com.iwlac.tracky.models.TrackedProduct;
 
@@ -45,6 +47,8 @@ public class MainActivity extends BaseActivity {
     private int[] tabColors;
     private AHBottomNavigationAdapter navigationAdapter;
     private HomePageAdapter adapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
