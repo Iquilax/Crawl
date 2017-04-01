@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
         initData();
 
         Realm.init(this);
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(realmConfig);
 
         mRealm = Realm.getInstance(realmConfig);
@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
 
 
         RealmResults<Item> items = mRealm.where(Item.class).findAll();
-        System.out.println("Thienn" + items);
+        Log.d("Thienn" , items.toString());
 
 
 
