@@ -1,8 +1,15 @@
 package com.iwlac.tracky.activity;
 
+import android.animation.Animator;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
@@ -12,15 +19,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.HomePageAdapter;
-import com.iwlac.tracky.entity.Item;
+import com.iwlac.tracky.firebasemanager.Database;
+import com.iwlac.tracky.models.Products;
+import com.iwlac.tracky.models.TrackedProduct;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.vpHome)
@@ -33,10 +46,6 @@ public class MainActivity extends BaseActivity {
     private AHBottomNavigationAdapter navigationAdapter;
     private HomePageAdapter adapter;
 
-    private Realm mRealm;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,28 +53,6 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         initUI();
         initData();
-
-        Realm.init(this);
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();
-        Realm.setDefaultConfiguration(realmConfig);
-
-        mRealm = Realm.getInstance(realmConfig);
-
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Item item = realm.createObject(Item.class);
-                item.setName("Fido");
-            }
-        });
-
-
-        RealmResults<Item> items = mRealm.where(Item.class).findAll();
-        System.out.println("Thienn" + items);
-
-
-
-
     }
 
     private void initData() {
@@ -122,11 +109,5 @@ public class MainActivity extends BaseActivity {
         });
         bottomNavigation.setCurrentItem(1);
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mRealm.close();
     }
 }

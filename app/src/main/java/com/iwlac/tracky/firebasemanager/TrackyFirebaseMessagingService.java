@@ -5,21 +5,18 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.github.arturogutierrez.Badges;
+import com.github.arturogutierrez.BadgesNotSupportedException;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.iwlac.tracky.activity.MainActivity;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.activity.ProductDetailActivity;
-import com.iwlac.tracky.manager.sharedpreference.TrackySharedPreferencesManager;
-
-import me.leolin.shortcutbadger.ShortcutBadger;
 
 import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_NAME;
 
@@ -31,11 +28,12 @@ import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_NAME;
 public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MessagingService";
-
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
+
         Log.d(TAG, "From: " + remoteMessage.getFrom());
+
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
@@ -47,12 +45,14 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             sendNotification(remoteMessage.getNotification().getBody());
         }
-        TrackySharedPreferencesManager sp = TrackySharedPreferencesManager.getInstance(this);
 
-        ShortcutBadger.applyCount(this, sp.getUnreadNotificationCount());
-        Log.d(TAG, "Message Notification Body: " + sp.getUnreadNotificationCount());
-//        ShortcutBadger.removeCount(this);
-
+        //Set badge number
+        try {
+            Log.d(TAG, "Setting number on app icon");
+            Badges.setBadge(this, 5);
+        } catch (BadgesNotSupportedException badgesNotSupportedException) {
+            Log.d(TAG, badgesNotSupportedException.getMessage());
+        }
     }
 
     @Override
