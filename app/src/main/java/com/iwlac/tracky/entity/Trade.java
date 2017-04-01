@@ -1,6 +1,7 @@
 package com.iwlac.tracky.entity;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Thien on 4/1/2017.

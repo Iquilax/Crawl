@@ -19,6 +19,8 @@ import com.iwlac.tracky.adapter.HomePageAdapter;
 import com.iwlac.tracky.entity.Item;
 import com.iwlac.tracky.entity.Trade;
 import com.iwlac.tracky.entity.Updates;
+import com.iwlac.tracky.entity.service.TradeService;
+import com.iwlac.tracky.realm.RealmManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +40,7 @@ public class MainActivity extends BaseActivity {
     private HomePageAdapter adapter;
 
     private Realm mRealm;
+    private TradeService tradeService;
 
 
 
@@ -49,42 +52,58 @@ public class MainActivity extends BaseActivity {
         initUI();
         initData();
 
-        Realm.init(this);
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
-        Realm.setDefaultConfiguration(realmConfig);
+        //Init Realm
+        mRealm = RealmManager.open();
 
-        mRealm = Realm.getInstance(realmConfig);
+        //Create a service
+        tradeService = RealmManager.createTradeService();
 
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Item item = realm.createObject(Item.class);
-                item.setName("Fido");
-            }
-        });
-
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Trade trade = realm.createObject(Trade.class);
-                trade.setId("271729");
+        //Create
+        Trade trade = new Trade();
+                trade.setId("271728");
                 trade.setPrice(1020);
+        tradeService.save(trade);
 
-                Updates update = realm.createObject(Updates.class);
-                update.setKey("190");
-                update.setValue(trade);
-            }
-        });
+        //Search
+        Trade trade1 = (Trade) tradeService.findTradeById("271729");
 
-
-        RealmResults<Item> items = mRealm.where(Item.class).findAll();
-        Log.d("Thienn" , items.toString());
-
-        RealmResults<Updates> updates = mRealm.where(Updates.class).findAll();
-        Log.d("Thienn" , updates.toString());
+        //Remove
+        tradeService.remove(trade1);
 
 
+        RealmResults<Trade> trades = tradeService.loadAllAsync();
+        Log.d("Thienn" , trades.toString());
 
+//        mRealm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                Item item = realm.createObject(Item.class);
+//                item.setName("Fido");
+//            }
+//        });
+//
+//        mRealm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                Trade trade = realm.createObject(Trade.class);
+//                trade.setId("271729");
+//                trade.setPrice(1020);
+//
+//                Updates update = realm.createObject(Updates.class);
+//                update.setKey("190");
+//                update.setValue(trade);
+//            }
+//        });
+//
+//
+//        RealmResults<Item> items = mRealm.where(Item.class).findAll();
+//        Log.d("Thienn" , items.toString());
+//
+//        RealmResults<Updates> updates = mRealm.where(Updates.class).findAll();
+//        Log.d("Thienn" , updates.toString());
+//
+//
+//        Log.d("Thienn", "path: " + mRealm.getPath());
 
     }
 
@@ -147,6 +166,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mRealm.close();
+        RealmManager.close();
     }
 }

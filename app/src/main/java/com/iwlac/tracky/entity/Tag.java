@@ -7,18 +7,24 @@ import io.realm.RealmObject;
  */
 
 public class Tag extends RealmObject {
-    private String productId;
+    private TrackedProduct trackedProduct;
     private String tag;
 
     public Tag() {
     }
 
-    public String getProductId() {
-        return productId;
+
+    public Tag(TrackedProduct trackedProduct, String tag) {
+        this.trackedProduct = trackedProduct;
+        this.tag = tag;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public TrackedProduct getTrackedProduct() {
+        return trackedProduct;
+    }
+
+    public void setTrackedProduct(TrackedProduct trackedProduct) {
+        this.trackedProduct = trackedProduct;
     }
 
     public String getTag() {
@@ -32,7 +38,7 @@ public class Tag extends RealmObject {
     @Override
     public String toString() {
         return "Tag{" +
-                "productId='" + productId + '\'' +
+                "trackedProduct=" + trackedProduct +
                 ", tag='" + tag + '\'' +
                 '}';
     }
