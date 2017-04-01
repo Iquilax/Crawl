@@ -29,4 +29,12 @@ public class Updates extends RealmObject {
     public void setValue(Trade value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "Updates{" +
+                "key='" + key + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

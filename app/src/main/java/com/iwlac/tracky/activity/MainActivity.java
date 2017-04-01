@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.HomePageAdapter;
 import com.iwlac.tracky.entity.Item;
+import com.iwlac.tracky.entity.Trade;
+import com.iwlac.tracky.entity.Updates;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,9 +63,25 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Trade trade = realm.createObject(Trade.class);
+                trade.setId("271729");
+                trade.setPrice(1020);
+
+                Updates update = realm.createObject(Updates.class);
+                update.setKey("190");
+                update.setValue(trade);
+            }
+        });
+
 
         RealmResults<Item> items = mRealm.where(Item.class).findAll();
         Log.d("Thienn" , items.toString());
+
+        RealmResults<Updates> updates = mRealm.where(Updates.class).findAll();
+        Log.d("Thienn" , updates.toString());
 
 
 
