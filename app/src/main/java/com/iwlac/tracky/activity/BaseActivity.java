@@ -1,5 +1,6 @@
 package com.iwlac.tracky.activity;
 
+import android.app.ActionBar;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.iwlac.tracky.R;
 import com.iwlac.tracky.models.TrackedProduct;
 import com.iwlac.tracky.networks.ApiService;
 import com.iwlac.tracky.utility.NetworkConstant;
@@ -36,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
 

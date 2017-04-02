@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.activity.PriceCompareActivity;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotProductFragment extends Fragment {
+public class HotProductFragment extends Fragment implements TrackPriceDialogFragment.OnFragmentInteractionListener{
     @BindView(R.id.rvHotProduct)
     RecyclerView rvHotProduct;
 
@@ -129,7 +130,10 @@ public class HotProductFragment extends Fragment {
                         Toast.LENGTH_SHORT).show();
             }
         };
-        Database.getReference().addChildEventListener(childEventListener);
+        Database.getProduct().addChildEventListener(childEventListener);
     }
 
+    @Override
+    public void onFragmentInteraction(double price) {
+    }
 }

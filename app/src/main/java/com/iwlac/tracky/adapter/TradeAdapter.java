@@ -64,7 +64,8 @@ public class TradeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         Trade item = listTrackedProduct.get(position);
         viewHolder.tvTitle.setText(item.getDescription());
         viewHolder.tvPrice.setText(String.format("%1$,.0f", item.getPrice()) + "₫");
-        viewHolder.tvChannel.setText(item.getTrackedPlaces());
+        viewHolder.tvGroup.setText("Phones & Gadgets");
+
     }
 
     @Override
@@ -87,8 +88,8 @@ public class TradeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public class TradeViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvChannel)
-        TextView tvChannel;
+        @BindView(R.id.tvGroup)
+        TextView tvGroup;
         @BindView(R.id.tvPrice)
         TextView tvPrice;
         @BindView(R.id.tvTitle)

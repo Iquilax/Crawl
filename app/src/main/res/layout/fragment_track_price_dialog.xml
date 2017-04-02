@@ -1,7 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="1000dp"
+    android:minHeight="450dp"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context="com.iwlac.tracky.fragment.TrackPriceDialogFragment">
@@ -10,13 +13,53 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Price" />
-    <EditText
-        android:id="@+id/etPrice"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="Notify me when" />
+
+    <io.apptik.widget.MultiSlider
+        android:id="@+id/rbPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+
+        app:rangeColor="@color/colorPrimary"
+        app:thumbColor="@color/colorPrimary"
+        app:drawThumbsApart="true"
+
         />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/label_min"
+            android:textSize="18dp"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="from"/>
+        <TextView
+            android:id="@+id/tvMin"
+            android:layout_toRightOf="@id/label_min"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvMax"
+            android:textSize="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/label_max"
+            android:textSize="18dp"
+            android:layout_toLeftOf="@id/tvMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to"/>
+    </RelativeLayout>
+
+
     <Button
         android:id="@+id/btnTrack"
         android:layout_width="match_parent"

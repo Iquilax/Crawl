@@ -138,7 +138,7 @@ public class TrackedProductFragment extends Fragment {
                         Toast.LENGTH_SHORT).show();
             }
         };
-        Database.getReference().addChildEventListener(childEventListener);
+        Database.getProduct().addChildEventListener(childEventListener);
     }
 
 }

@@ -16,9 +16,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -30,6 +32,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
@@ -38,6 +43,8 @@ import com.iwlac.tracky.adapter.TrackedProductAdapter;
 import com.iwlac.tracky.adapter.TradeAdapter;
 import com.iwlac.tracky.firebasemanager.Database;
 import com.iwlac.tracky.fragment.TrackPriceDialogFragment;
+import com.iwlac.tracky.models.Location;
+import com.iwlac.tracky.models.TrackedProduct;
 import com.iwlac.tracky.models.Trade;
 
 import org.parceler.Parcels;
@@ -72,7 +79,6 @@ public class PriceCompareActivity extends AppCompatActivity implements TrackPric
         HashMap<String, Trade> updates = Parcels.unwrap(getIntent().getParcelableExtra("Updates"));
         itemId = getIntent().getStringExtra("ItemId");
         names = new ArrayList<>(updates.values());
-//        names.add(new Trade());
         adapter = new TradeAdapter(names, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -89,20 +95,79 @@ public class PriceCompareActivity extends AppCompatActivity implements TrackPric
                 editNameDialogFragment.show(fm, "fragment_track_price");
             }
         });
+        rvTrade.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                if (dy > 0 ||dy<0 && btnTrack.isShown())
+                    btnTrack.hide();
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                    btnTrack.show();
+                }
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
+
 
     }
 
 
     @Override
     public void onFragmentInteraction(double price) {
-//        Snackbar.make(,"Tracked",Snackbar.LENGTH_LONG).show();
         Database.track(FirebaseInstanceId.getInstance().getToken(), itemId, price);
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+    }
 
-        SharedPreferences.Editor editor = sharedPref.edit();
-        Set<String> trackList = sharedPref.getStringSet("TRACKED", new HashSet<String>());
-        trackList.add(itemId);
-        editor.putStringSet("TRACKED", trackList);
-        editor.commit();
+    private void setUpFirebaseListener(){
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
+                Location location = dataSnapshot.getValue(Location.class);
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+                Log.d("Buu", "onChildChanged:" + dataSnapshot.getKey());
+
+                // A comment has changed, use the key to determine if we are displaying this
+                // comment and if so displayed the changed comment.
+                TrackedProduct newComment = dataSnapshot.getValue(TrackedProduct.class);
+                String commentKey = dataSnapshot.getKey();
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Log.d("Buu", "onChildRemoved:" + dataSnapshot.getKey());
+
+                // A comment has changed, use the key to determine if we are displaying this
+                // comment and if so remove it.
+                String commentKey = dataSnapshot.getKey();
+
+                // ...
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+                Log.d("BUU", "onChildMoved:" + dataSnapshot.getKey());
+
+                // A comment has changed position, use the key to determine if we are
+                // displaying this comment and if so move it.
+                TrackedProduct movedComment = dataSnapshot.getValue(TrackedProduct.class);
+                String commentKey = dataSnapshot.getKey();
+
+                // ...
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        Database.getLocation().addChildEventListener(childEventListener);
     }
 }

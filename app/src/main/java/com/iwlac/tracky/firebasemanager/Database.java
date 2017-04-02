@@ -17,15 +17,17 @@ public class Database {
 
     }
 
-    public static DatabaseReference getReference() {
-        if (dbRef == null) {
-            dbRef = FirebaseDatabase.getInstance().getReference("products");
-        }
-
+    public static DatabaseReference getProduct() {
+        dbRef = FirebaseDatabase.getInstance().getReference("products");
         return dbRef;
     }
 
-    public static boolean track(String id,String itemId,double price) {
+    public static DatabaseReference getLocation() {
+        dbRef = FirebaseDatabase.getInstance().getReference("locations");
+        return dbRef;
+    }
+
+    public static boolean track(String id, String itemId, double price) {
         TrackedAttempt attempt = new TrackedAttempt();
         attempt.setPrice(price);
         attempt.setId(id);

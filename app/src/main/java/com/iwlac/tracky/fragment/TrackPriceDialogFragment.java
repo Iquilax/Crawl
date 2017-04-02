@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
@@ -20,16 +21,21 @@ import com.iwlac.tracky.adapter.TrackedProductAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.apptik.widget.MultiSlider;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TrackPriceDialogFragment extends DialogFragment {
     private OnFragmentInteractionListener mListener;
-    @BindView(R.id.etPrice)
-    EditText etPrice;
     @BindView(R.id.btnTrack)
     Button btnTrack;
+    @BindView(R.id.rbPrice)
+    MultiSlider rbPrice;
+    @BindView(R.id.tvMin)
+    TextView tvMin;
+    @BindView(R.id.tvMax)
+    TextView tvMax;
 
     public TrackPriceDialogFragment() {
         // Required empty public constructor
@@ -69,12 +75,27 @@ public class TrackPriceDialogFragment extends DialogFragment {
         btnTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onFragmentInteraction(Double.parseDouble(etPrice.getText().toString()));
+                mListener.onFragmentInteraction(rbPrice.getThumb(0).getValue());
                 dismiss();
             }
         });
-        return view;
+        rbPrice.setOnThumbValueChangeListener(new MultiSlider.OnThumbValueChangeListener() {
+            @Override
+            public void onValueChanged(MultiSlider multiSlider, MultiSlider.Thumb thumb, int thumbIndex, int value) {
+                if (thumbIndex == 0) {
+                    tvMin.setText(" " + value);
+                } else {
+                    tvMax.setText(" " + value);
+                }
+            }
+        });
+        rbPrice.setMax(1000,true,true);
 
+//        rbPrice.getThumb(1).setValue(1000);
+        rbPrice.setMin(500,true,true);
+
+
+        return view;
     }
 
     public interface OnFragmentInteractionListener {

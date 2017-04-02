@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.HomePageAdapter;
 import com.iwlac.tracky.firebasemanager.Database;
+import com.iwlac.tracky.fragment.TrackPriceDialogFragment;
 import com.iwlac.tracky.models.Products;
 import com.iwlac.tracky.models.TrackedProduct;
 
@@ -35,7 +36,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements TrackPriceDialogFragment.OnFragmentInteractionListener{
     @BindView(R.id.vpHome)
     AHBottomNavigationViewPager viewPager;
     @BindView(R.id.navHome)
@@ -61,13 +62,11 @@ public class MainActivity extends BaseActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("BUU", "signInAnonymously:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w("BUU", "signInAnonymously", task.getException());
                             Toast.makeText(MainActivity.this, "gi do vkl", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -81,7 +80,6 @@ public class MainActivity extends BaseActivity {
         tabColors = getApplicationContext().getResources().getIntArray(R.array.tab_colors);
         navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu);
         navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
-//        bottomNavigation.setColored(true);
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
@@ -93,6 +91,11 @@ public class MainActivity extends BaseActivity {
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
         bottomNavigation.setCurrentItem(1);
+
+    }
+
+    @Override
+    public void onFragmentInteraction(double price) {
 
     }
 }
