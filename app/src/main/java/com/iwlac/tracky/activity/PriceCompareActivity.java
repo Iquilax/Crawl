@@ -40,11 +40,13 @@ import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
 import com.iwlac.tracky.adapter.TradeAdapter;
+import com.iwlac.tracky.entity.Location;
+import com.iwlac.tracky.entity.service.LocationService;
 import com.iwlac.tracky.firebasemanager.Database;
 import com.iwlac.tracky.fragment.TrackPriceDialogFragment;
-import com.iwlac.tracky.models.Location;
 import com.iwlac.tracky.models.TrackedProduct;
 import com.iwlac.tracky.models.Trade;
+import com.iwlac.tracky.realm.RealmManager;
 
 import org.parceler.Parcels;
 
@@ -56,6 +58,8 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class PriceCompareActivity extends AppCompatActivity {
     @BindView(R.id.rvTrade)
@@ -68,6 +72,8 @@ public class PriceCompareActivity extends AppCompatActivity {
     List<Trade> names = new ArrayList<>();
     String itemId;
 
+    Realm mRealm;
+    LocationService locationService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +117,9 @@ public class PriceCompareActivity extends AppCompatActivity {
             }
         });
 
-
+        mRealm = RealmManager.open();
+        locationService = RealmManager.createLocationService();
+        setUpFirebaseListener();
     }
 
 
@@ -119,8 +127,10 @@ public class PriceCompareActivity extends AppCompatActivity {
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
-                Location location = dataSnapshot.getValue(Location.class);
+                Location location
+                        = new Location(dataSnapshot.getKey(), dataSnapshot.getValue().toString());
+                locationService.save(location);
+
 
             }
 
@@ -163,5 +173,12 @@ public class PriceCompareActivity extends AppCompatActivity {
             }
         };
         Database.getLocation().addChildEventListener(childEventListener);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RealmManager.close();
     }
 }

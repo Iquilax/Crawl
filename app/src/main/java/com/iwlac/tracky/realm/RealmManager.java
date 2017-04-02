@@ -1,6 +1,7 @@
 package com.iwlac.tracky.realm;
 
 import com.iwlac.tracky.entity.Trade;
+import com.iwlac.tracky.entity.service.LocationService;
 import com.iwlac.tracky.entity.service.TradeService;
 
 import io.realm.Realm;
@@ -27,6 +28,11 @@ public class RealmManager {
     public static TradeService createTradeService() {
         checkForOpenRealm();
         return new TradeService(mRealm);
+    }
+
+    public static LocationService createLocationService() {
+        checkForOpenRealm();
+        return new LocationService(mRealm);
     }
 
     public static void clear() {
