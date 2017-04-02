@@ -33,12 +33,8 @@ import io.apptik.widget.MultiSlider;
 public class TrackPriceDialogFragment extends DialogFragment {
     @BindView(R.id.btnTrack)
     Button btnTrack;
-    @BindView(R.id.rbPrice)
-    MultiSlider rbPrice;
-    @BindView(R.id.tvMin)
-    TextView tvMin;
-    @BindView(R.id.tvMax)
-    TextView tvMax;
+    @BindView(R.id.etPrice)
+    EditText etPrice;
 
     private String itemId;
 
@@ -83,7 +79,7 @@ public class TrackPriceDialogFragment extends DialogFragment {
         btnTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean result = Database.track(FirebaseInstanceId.getInstance().getToken(),itemId,rbPrice.getThumb(0).getValue());
+                boolean result = Database.track(FirebaseInstanceId.getInstance().getToken(),itemId,Double.parseDouble(etPrice.getText().toString()));
                 if (result){
                     dismiss();
                 } else {
@@ -91,20 +87,6 @@ public class TrackPriceDialogFragment extends DialogFragment {
                 }
             }
         });
-        rbPrice.setOnThumbValueChangeListener(new MultiSlider.OnThumbValueChangeListener() {
-            @Override
-            public void onValueChanged(MultiSlider multiSlider, MultiSlider.Thumb thumb, int thumbIndex, int value) {
-                if (thumbIndex == 0) {
-                    tvMin.setText(" " + value);
-                } else {
-                    tvMax.setText(" " + value);
-                }
-            }
-        });
-        rbPrice.setMax(1000,true,true);
-
-//        rbPrice.getThumb(1).setValue(1000);
-        rbPrice.setMin(500,true,true);
 
 
         return view;

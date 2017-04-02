@@ -65,13 +65,14 @@ public class TrackedProductFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tracked_product, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rvTrackedProduct.setLayoutManager(linearLayoutManager);
         adapter = new TrackedProductAdapter(tradeList, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Intent i = new Intent(getContext(), PriceCompareActivity.class);
+                Intent i = new Intent(getContext(),PriceCompareActivity.class);
+                i.putExtra("ItemId",tradeList.get(position).getId());
                 startActivity(i);
             }
         });
@@ -80,20 +81,28 @@ public class TrackedProductFragment extends Fragment {
         setUpFirebaseListener();
         return view;
     }
-    private void setUpFirebaseListener(){
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        final Set<String> trackList = sharedPref.getStringSet("TRACKED", new HashSet<String>());
+
+    private void setUpFirebaseListener() {
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
-                if (trackList.contains(dataSnapshot.getKey())){
-                    TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
-                    int position = product.getTrackedAttempses().indexOf(FirebaseInstanceId.getInstance().getToken());
-                    adapter.add(product.getTrackedAttempses().get(position));
-                }
-
+//                TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
+//                int position = product.getTrackedAttempses().indexOf(FirebaseInstanceId.getInstance().getToken());
+//                adapter.add(product.getTrackedAttempses().get(position));
+                TrackedAttempt product = new TrackedAttempt();
+                product.setPrice(20000);
+                product.setTrackedPlaces(new ArrayList<String>());
+                adapter.add(product);
+                tradeList.add(product);
+                adapter.add(product);
+                tradeList.add(product);
+                adapter.add(product);
+                tradeList.add(product);
+                adapter.add(product);
+                tradeList.add(product);
+                adapter.add(product);
+                tradeList.add(product);
 
             }
 

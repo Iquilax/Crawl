@@ -65,7 +65,6 @@ public class MainActivity extends BaseActivity{
         ButterKnife.bind(this);
         initUI();
         initData();
-
         //Init Realm
         mRealm = RealmManager.open();
 
@@ -136,8 +135,6 @@ public class MainActivity extends BaseActivity{
                         }
                     }
                 });
-
-
     }
 
 

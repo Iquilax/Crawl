@@ -12,35 +12,42 @@
         android:layout_gravity="center"
         android:backgroundTint="#8fff"
         card_view:contentPadding="8dp"
-        android:layout_margin="8dp">
+        android:layout_margin="4dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
+                android:background="@drawable/border"
                 android:id="@+id/imLogo"
-                android:layout_width="50dp"
+                android:layout_width="55dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/logo_chotot" />
 
-            <TextView
-                android:layout_toRightOf="@id/imLogo"
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mac book 2016"
-                android:textSize="20dp"
-                android:textStyle="bold" />
 
-            <TextView
+            <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/imLogo"
-                android:id="@+id/tvChannel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvTitle"
-                android:text="from Group Face" />
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mac book 2016"
+                    android:textColor="@color/priceColor"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvChannel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitle"
+                    android:text="Group Face" />
+            </LinearLayout>
 
             <TextView
                 android:id="@id/tvPrice"
@@ -49,8 +56,8 @@
                 android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:text="90000₫"
-                android:textColor="@color/colorAccent"
-                android:textSize="30dp" />
+                android:textColor="@color/priceColor"
+                android:textSize="18sp" />
         </RelativeLayout>
 
 

@@ -1,6 +1,7 @@
 package com.iwlac.tracky.activity;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

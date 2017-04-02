@@ -75,9 +75,7 @@ public class PriceCompareActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         linearLayoutManager = new LinearLayoutManager(getBaseContext());
         rvTrade.setLayoutManager(linearLayoutManager);
-        HashMap<String, Trade> updates = Parcels.unwrap(getIntent().getParcelableExtra("Updates"));
         itemId = getIntent().getStringExtra("ItemId");
-        names = new ArrayList<>(updates.values());
         adapter = new TradeAdapter(names, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -110,6 +108,7 @@ public class PriceCompareActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
+        setUpFirebaseListener();
 
 
     }
@@ -120,7 +119,8 @@ public class PriceCompareActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
-                Location location = dataSnapshot.getValue(Location.class);
+                Trade item = dataSnapshot.getValue(Trade.class);
+                adapter.add(item);
 
             }
 
@@ -162,6 +162,6 @@ public class PriceCompareActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        Database.getLocation().addChildEventListener(childEventListener);
+        Database.getUpdates(itemId).addChildEventListener(childEventListener);
     }
 }

@@ -26,6 +26,10 @@ public class Database {
         dbRef = FirebaseDatabase.getInstance().getReference("locations");
         return dbRef;
     }
+    public static DatabaseReference getUpdates(String itemId) {
+        dbRef = FirebaseDatabase.getInstance().getReference("products/" + itemId + "/updates");
+        return dbRef;
+    }
 
     public static boolean track(String id, String itemId, double price) {
         try {

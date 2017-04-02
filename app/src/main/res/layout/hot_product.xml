@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="8dp">
 
@@ -21,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hot_product_image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_placeholder" />
+                app:srcCompat="@drawable/ic_placeholder"/>
 
 
             <RelativeLayout
@@ -33,28 +35,28 @@
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="sdasdas"
-                    android:textAllCaps="true"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:text="iPhone 6s 32GB Rose"
+                    android:textSize="16sp"
+                    android:textColor="@color/priceColor"/>
 
                 <TextView
+                    android:id="@+id/tvGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvName"
-                    android:text="from" />
+                    android:text="from Phones &amp; Gadgets" />
 
                 <TextView
                     android:layout_below="@id/btnTrack"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
+                    android:layout_alignBottom="@id/tvGroup"
                     android:id="@+id/tvPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$2313231"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
+                    android:text="4.000.000₫"
+                    android:textColor="@color/priceColor"
+                    android:textStyle="italic"
+                    android:textSize="16sp"/>
 
             </RelativeLayout>
             <android.support.design.widget.FloatingActionButton
@@ -62,12 +64,15 @@
                 android:layout_alignParentRight="true"
                 android:tint="@color/white"
                 android:layout_alignBottom="@id/imThumbnail"
+                android:elevation="0dp"
+                android:background="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_marginBottom="-20dp"
+                android:padding="20dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/ic_remove_red_eye_black_48dp" />
+                android:src="@drawable/ic_notifications_active_black_48dp" />
 
         </RelativeLayout>
 

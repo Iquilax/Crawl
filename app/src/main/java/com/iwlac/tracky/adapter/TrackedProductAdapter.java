@@ -60,7 +60,7 @@ public class TrackedProductAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private void configureTrackedProductViewHolder(TrackedProductViewHolder viewHolder, int position) {
         TrackedAttempt item = listTrackedProduct.get(position);
-        viewHolder.tvTitle.setText(item.getId());
+//        viewHolder.tvTitle.setText(item.getId());
         viewHolder.tvPrice.setText(item.getPrice() + "");
     }
 

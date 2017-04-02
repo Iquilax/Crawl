@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotProductFragment extends Fragment {
+public class HotProductFragment extends Fragment{
     @BindView(R.id.rvHotProduct)
     RecyclerView rvHotProduct;
 
@@ -67,7 +67,6 @@ public class HotProductFragment extends Fragment {
             @Override
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getContext(), PriceCompareActivity.class);
-                i.putExtra("Updates", Parcels.wrap(productList.get(position).getUpdates()));
                 i.putExtra("ItemId", productList.get(position).getId());
                 startActivity(i);
             }
@@ -87,6 +86,16 @@ public class HotProductFragment extends Fragment {
                 TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
                 product.setId(dataSnapshot.getKey());
                 adapter.add(product);
+                adapter.add(product);
+                adapter.add(product);
+                adapter.add(product);
+                adapter.add(product);
+                adapter.add(product);
+                adapter.add(product);
+                adapter.add(product);
+                adapter.add(product);
+
+
             }
 
             @Override
@@ -132,6 +141,4 @@ public class HotProductFragment extends Fragment {
         };
         Database.getProduct().addChildEventListener(childEventListener);
     }
-
-
 }
