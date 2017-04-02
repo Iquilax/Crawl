@@ -28,13 +28,19 @@ public class Database {
     }
 
     public static boolean track(String id, String itemId, double price) {
-        TrackedAttempt attempt = new TrackedAttempt();
-        attempt.setPrice(price);
-        attempt.setId(id);
-        attempt.setTrackedPlaces(new ArrayList<String>());
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("products/" + itemId + "/trackedAttempts");
-        ref.child(id).setValue(attempt);
-        return false;
+        try {
+            TrackedAttempt attempt = new TrackedAttempt();
+            attempt.setPrice(price);
+            attempt.setId(id);
+            attempt.setTrackedPlaces(new ArrayList<String>());
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("products/" + itemId + "/trackedAttempts");
+            ref.child(id).setValue(attempt);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+
     }
 
 

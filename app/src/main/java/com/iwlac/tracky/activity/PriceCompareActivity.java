@@ -38,7 +38,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
-import com.iwlac.tracky.activity.ProductDetailActivity;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
 import com.iwlac.tracky.adapter.TradeAdapter;
 import com.iwlac.tracky.firebasemanager.Database;
@@ -58,7 +57,7 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PriceCompareActivity extends AppCompatActivity implements TrackPriceDialogFragment.OnFragmentInteractionListener {
+public class PriceCompareActivity extends AppCompatActivity {
     @BindView(R.id.rvTrade)
     RecyclerView rvTrade;
     @BindView(R.id.btnTrack)
@@ -91,7 +90,7 @@ public class PriceCompareActivity extends AppCompatActivity implements TrackPric
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getSupportFragmentManager();
-                TrackPriceDialogFragment editNameDialogFragment = TrackPriceDialogFragment.newInstance();
+                TrackPriceDialogFragment editNameDialogFragment = TrackPriceDialogFragment.newInstance(itemId);
                 editNameDialogFragment.show(fm, "fragment_track_price");
             }
         });
@@ -115,11 +114,6 @@ public class PriceCompareActivity extends AppCompatActivity implements TrackPric
 
     }
 
-
-    @Override
-    public void onFragmentInteraction(double price) {
-        Database.track(FirebaseInstanceId.getInstance().getToken(), itemId, price);
-    }
 
     private void setUpFirebaseListener(){
         ChildEventListener childEventListener = new ChildEventListener() {

@@ -10,9 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_gravity="center"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="3dp"
-        card_view:cardUseCompatPadding="true">
+        android:layout_margin="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -62,6 +60,7 @@
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/btnTrack"
                 android:layout_alignParentRight="true"
+                android:tint="@color/white"
                 android:layout_alignBottom="@id/imThumbnail"
                 android:layout_width="wrap_content"
                 android:layout_marginBottom="-20dp"

@@ -76,8 +76,8 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             @Override
             public void onClick(View v) {
                 FragmentManager fm = ((MainActivity) context).getSupportFragmentManager();
-                TrackPriceDialogFragment editNameDialogFragment = TrackPriceDialogFragment.newInstance();
-                editNameDialogFragment.show(fm, "fragment_track_price");
+                TrackPriceDialogFragment trackPriceDialogFragment = TrackPriceDialogFragment.newInstance(item.getId());
+                trackPriceDialogFragment.show(fm, "fragment_track_price");
             }
         });
 //        Glide.with(context).load(trades.get(0).getFullPicture()).into(viewHolder.imThumbnail);

@@ -42,7 +42,7 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class MainActivity extends BaseActivity implements TrackPriceDialogFragment.OnFragmentInteractionListener{
+public class MainActivity extends BaseActivity{
     @BindView(R.id.vpHome)
     AHBottomNavigationViewPager viewPager;
     @BindView(R.id.navHome)
@@ -159,9 +159,6 @@ public class MainActivity extends BaseActivity implements TrackPriceDialogFragme
 
     }
 
-    @Override
-    public void onFragmentInteraction(double price) {
-    }
     protected void onDestroy() {
         super.onDestroy();
         RealmManager.close();

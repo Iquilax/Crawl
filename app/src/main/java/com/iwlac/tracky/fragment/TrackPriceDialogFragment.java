@@ -4,6 +4,8 @@ package com.iwlac.tracky.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,10 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.activity.PriceCompareActivity;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
+import com.iwlac.tracky.firebasemanager.Database;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +31,6 @@ import io.apptik.widget.MultiSlider;
  * A simple {@link Fragment} subclass.
  */
 public class TrackPriceDialogFragment extends DialogFragment {
-    private OnFragmentInteractionListener mListener;
     @BindView(R.id.btnTrack)
     Button btnTrack;
     @BindView(R.id.rbPrice)
@@ -37,32 +40,37 @@ public class TrackPriceDialogFragment extends DialogFragment {
     @BindView(R.id.tvMax)
     TextView tvMax;
 
+    private String itemId;
+
+
     public TrackPriceDialogFragment() {
         // Required empty public constructor
     }
 
-    public static TrackPriceDialogFragment newInstance() {
+    public static TrackPriceDialogFragment newInstance(String itemId) {
         TrackPriceDialogFragment fragment = new TrackPriceDialogFragment();
         Bundle args = new Bundle();
+        args.putString("ID",itemId);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            itemId = getArguments().getString("ID");
+        }
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -75,8 +83,12 @@ public class TrackPriceDialogFragment extends DialogFragment {
         btnTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onFragmentInteraction(rbPrice.getThumb(0).getValue());
-                dismiss();
+                boolean result = Database.track(FirebaseInstanceId.getInstance().getToken(),itemId,rbPrice.getThumb(0).getValue());
+                if (result){
+                    dismiss();
+                } else {
+                    Snackbar.make(v,"Some error occur", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
         rbPrice.setOnThumbValueChangeListener(new MultiSlider.OnThumbValueChangeListener() {
@@ -98,8 +110,4 @@ public class TrackPriceDialogFragment extends DialogFragment {
         return view;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(double price);
-    }
 }

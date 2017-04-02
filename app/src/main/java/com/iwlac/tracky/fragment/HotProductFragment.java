@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotProductFragment extends Fragment implements TrackPriceDialogFragment.OnFragmentInteractionListener{
+public class HotProductFragment extends Fragment {
     @BindView(R.id.rvHotProduct)
     RecyclerView rvHotProduct;
 
@@ -133,7 +133,5 @@ public class HotProductFragment extends Fragment implements TrackPriceDialogFrag
         Database.getProduct().addChildEventListener(childEventListener);
     }
 
-    @Override
-    public void onFragmentInteraction(double price) {
-    }
+
 }

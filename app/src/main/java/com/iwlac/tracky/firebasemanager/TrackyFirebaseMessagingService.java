@@ -16,7 +16,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.iwlac.tracky.activity.MainActivity;
 import com.iwlac.tracky.R;
-import com.iwlac.tracky.activity.ProductDetailActivity;
+import com.iwlac.tracky.activity.PriceCompareActivity;
 
 import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_NAME;
 
@@ -66,7 +66,7 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, ProductDetailActivity.class);
+        Intent intent = new Intent(this, PriceCompareActivity.class);
         intent.putExtra(EXTRA_PRODUCT_NAME, "");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
