@@ -38,6 +38,11 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             sendNotification(remoteMessage.getData().get("message"));
+            try {
+                Badges.setBadge(this, Integer.valueOf(remoteMessage.getData().get("notyCount")) );
+            } catch (BadgesNotSupportedException e) {
+                Log.d(TAG, e.getMessage());
+            }
         }
 
         // Check if message contains a notification payload.
@@ -46,13 +51,6 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
             sendNotification(remoteMessage.getNotification().getBody());
         }
 
-        //Set badge number
-        try {
-            Log.d(TAG, "Setting number on app icon");
-            Badges.setBadge(this, 5);
-        } catch (BadgesNotSupportedException badgesNotSupportedException) {
-            Log.d(TAG, badgesNotSupportedException.getMessage());
-        }
     }
 
     @Override
