@@ -71,7 +71,7 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void sendNotification(String productId, String messageBody) {
 
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, PriceCompareActivity.class);
         intent.putExtra(EXTRA_PRODUCT_CODE, productId);
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |

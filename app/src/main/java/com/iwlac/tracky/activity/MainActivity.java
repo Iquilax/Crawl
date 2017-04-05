@@ -61,18 +61,6 @@ public class MainActivity extends BaseActivity{
     private Realm mRealm;
     private TradeService tradeService;
 
-    private String productId;
-
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        processIntent(intent);
-    };
-
-    private void processIntent(Intent intent){
-        productId = intent.getStringExtra(EXTRA_PRODUCT_CODE);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,13 +68,6 @@ public class MainActivity extends BaseActivity{
         ButterKnife.bind(this);
         initUI();
         initData();
-
-        processIntent(getIntent());
-        if (productId!=null && !productId.isEmpty()){
-            Intent intent = new Intent(this, PriceCompareActivity.class);
-            intent.putExtra(EXTRA_PRODUCT_CODE, productId);
-            startActivity(intent);
-        }
     }
 
     private void initData() {
