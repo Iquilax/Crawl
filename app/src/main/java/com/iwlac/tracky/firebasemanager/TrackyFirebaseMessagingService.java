@@ -18,7 +18,7 @@ import com.iwlac.tracky.activity.MainActivity;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.activity.PriceCompareActivity;
 
-import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_NAME;
+import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_CODE;
 
 
 /**
@@ -37,7 +37,10 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-            sendNotification(remoteMessage.getData().get("message"));
+            String productId = remoteMessage.getData().get("productId");
+            String message = remoteMessage.getData().get("message");
+            sendNotification(productId, message);
+
             try {
                 Badges.setBadge(this, Integer.valueOf(remoteMessage.getData().get("notyCount")) );
             } catch (BadgesNotSupportedException e) {
@@ -48,7 +51,8 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage.getNotification().getBody());
+            String message = remoteMessage.getNotification().getBody();
+            sendNotification("-KgxCzdKcUMyZBXpJxdK", message);
         }
 
     }
@@ -63,16 +67,16 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
         super.onDeletedMessages();
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendNotification(String productId, String messageBody) {
         Intent intent = new Intent(this, PriceCompareActivity.class);
-        intent.putExtra(EXTRA_PRODUCT_NAME, "");
+        intent.putExtra(EXTRA_PRODUCT_CODE, productId);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_stat_ic_notification)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("FCM Message")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
