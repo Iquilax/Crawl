@@ -63,6 +63,8 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_CODE;
+
 public class PriceCompareActivity extends AppCompatActivity {
     @BindView(R.id.rvTrade)
     RecyclerView rvTrade;
@@ -85,7 +87,7 @@ public class PriceCompareActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         linearLayoutManager = new LinearLayoutManager(getBaseContext());
         rvTrade.setLayoutManager(linearLayoutManager);
-        itemId = getIntent().getStringExtra("ItemId");
+        itemId = getIntent().getStringExtra(EXTRA_PRODUCT_CODE);
         adapter = new TradeAdapter(names, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {

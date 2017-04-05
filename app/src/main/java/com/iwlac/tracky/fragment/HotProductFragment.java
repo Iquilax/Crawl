@@ -33,6 +33,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_CODE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -67,7 +69,7 @@ public class HotProductFragment extends Fragment{
             @Override
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getContext(), PriceCompareActivity.class);
-                i.putExtra("ItemId", productList.get(position).getId());
+                i.putExtra(EXTRA_PRODUCT_CODE, productList.get(position).getId());
                 startActivity(i);
             }
         });

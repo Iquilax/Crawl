@@ -38,6 +38,8 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_CODE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -72,7 +74,7 @@ public class TrackedProductFragment extends Fragment {
             @Override
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getContext(),PriceCompareActivity.class);
-                i.putExtra("ItemId",tradeList.get(position).getId());
+                i.putExtra(EXTRA_PRODUCT_CODE,tradeList.get(position).getId());
                 startActivity(i);
             }
         });
