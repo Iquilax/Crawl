@@ -42,7 +42,13 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".firebasemanager.TrackyFirebaseMessagingService">
             <intent-filter>
@@ -58,8 +64,9 @@
             android:name=".firebasemanager.backgroundservice.TrackyRSPullService"
             android:exported="false" />
 
-        <activity android:name=".activity.PriceCompareActivity" />
-        <!-- <activity android:name=".activity.ProductDetailActivity" /> -->
+        <activity android:name=".activity.PriceCompareActivity">
+        </activity>
+
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.WebDirectingActivity" />
         <activity android:name=".activity.TrackActivity" />

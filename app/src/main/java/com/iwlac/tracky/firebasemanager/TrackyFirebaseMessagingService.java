@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -40,7 +41,7 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
             String productId = remoteMessage.getData().get("productId");
             String message = remoteMessage.getData().get("message");
             sendNotification(productId, message);
-
+//            sendNotification("-KgxCzdKcUMyZBXpJxdK", message);
             try {
                 Badges.setBadge(this, Integer.valueOf(remoteMessage.getData().get("notyCount")) );
             } catch (BadgesNotSupportedException e) {
@@ -51,8 +52,9 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            String message = remoteMessage.getNotification().getBody();
-            sendNotification("-KgxCzdKcUMyZBXpJxdK", message);
+//            sendNotification("", remoteMessage.getNotification().getBody());
+
+            sendNotification("-KgxCzdKcUMyZBXpJxdK", remoteMessage.getNotification().getBody());
         }
 
     }
@@ -68,11 +70,14 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String productId, String messageBody) {
-        Intent intent = new Intent(this, PriceCompareActivity.class);
+
+        final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(EXTRA_PRODUCT_CODE, productId);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0 /* Request code */, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
@@ -85,9 +90,16 @@ public class TrackyFirebaseMessagingService extends FirebaseMessagingService {
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(Notification.PRIORITY_MAX);
 
+
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
+
+
+
+
+
 }
