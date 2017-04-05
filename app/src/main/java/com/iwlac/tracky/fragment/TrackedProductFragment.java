@@ -87,23 +87,16 @@ public class TrackedProductFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
-//                TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
-//                int position = product.getTrackedAttempses().indexOf(FirebaseInstanceId.getInstance().getToken());
-//                adapter.add(product.getTrackedAttempses().get(position));
-                TrackedAttempt product = new TrackedAttempt();
-                product.setPrice(20000);
-                product.setTrackedPlaces(new ArrayList<String>());
-                adapter.add(product);
-                tradeList.add(product);
-                adapter.add(product);
-                tradeList.add(product);
-                adapter.add(product);
-                tradeList.add(product);
-                adapter.add(product);
-                tradeList.add(product);
-                adapter.add(product);
-                tradeList.add(product);
+                TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
+                if (product.getTrackedAttempses() != null){
+                    for (TrackedAttempt attempt: product.getTrackedAttempses()
+                            ) {
+                        if (attempt.getId().equals(FirebaseInstanceId.getInstance().getToken())){
+                            adapter.add(attempt);
+                        }
 
+                    }
+                }
             }
 
             @Override

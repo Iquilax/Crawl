@@ -86,16 +86,6 @@ public class HotProductFragment extends Fragment{
                 TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
                 product.setId(dataSnapshot.getKey());
                 adapter.add(product);
-                adapter.add(product);
-                adapter.add(product);
-                adapter.add(product);
-                adapter.add(product);
-                adapter.add(product);
-                adapter.add(product);
-                adapter.add(product);
-                adapter.add(product);
-
-
             }
 
             @Override

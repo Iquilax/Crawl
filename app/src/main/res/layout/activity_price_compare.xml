@@ -27,7 +27,7 @@
             >
 
             <ImageView
-                android:id="@+id/main.backdrop"
+                android:id="@+id/imThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_remove_red_eye_black_48dp"
+        android:src="@drawable/ic_notifications_active_black_48dp"
         app:layout_anchor="@id/rvTrade"
         app:layout_behavior="com.iwlac.tracky.ScrollAwareFABBehavior"
         app:layout_anchorGravity="bottom|right|end"

@@ -15,6 +15,7 @@ public class Trade extends RealmObject{
     String description;
     String lastUpdate;
     String fullPicture;
+    String name;
     String id;
 
     public Trade() {

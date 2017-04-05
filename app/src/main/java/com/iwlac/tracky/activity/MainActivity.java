@@ -87,37 +87,6 @@ public class MainActivity extends BaseActivity{
         RealmResults<Trade> trades = tradeService.loadAllAsync();
         Log.d("Thienn" , trades.toString());
 
-//        mRealm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                Item item = realm.createObject(Item.class);
-//                item.setName("Fido");
-//            }
-//        });
-//
-//        mRealm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                Trade trade = realm.createObject(Trade.class);
-//                trade.setId("271729");
-//                trade.setPrice(1020);
-//
-//                Updates update = realm.createObject(Updates.class);
-//                update.setKey("190");
-//                update.setValue(trade);
-//            }
-//        });
-//
-//
-//        RealmResults<Item> items = mRealm.where(Item.class).findAll();
-//        Log.d("Thienn" , items.toString());
-//
-//        RealmResults<Updates> updates = mRealm.where(Updates.class).findAll();
-//        Log.d("Thienn" , updates.toString());
-//
-//
-//        Log.d("Thienn", "path: " + mRealm.getPath());
-
     }
 
     private void initData() {

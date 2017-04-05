@@ -19,9 +19,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
@@ -40,11 +42,13 @@ import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
 import com.iwlac.tracky.adapter.TradeAdapter;
+import com.iwlac.tracky.entity.Location;
+import com.iwlac.tracky.entity.service.LocationService;
 import com.iwlac.tracky.firebasemanager.Database;
 import com.iwlac.tracky.fragment.TrackPriceDialogFragment;
-import com.iwlac.tracky.models.Location;
 import com.iwlac.tracky.models.TrackedProduct;
 import com.iwlac.tracky.models.Trade;
+import com.iwlac.tracky.realm.RealmManager;
 
 import org.parceler.Parcels;
 
@@ -56,18 +60,24 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class PriceCompareActivity extends AppCompatActivity {
     @BindView(R.id.rvTrade)
     RecyclerView rvTrade;
     @BindView(R.id.btnTrack)
     FloatingActionButton btnTrack;
+    @BindView(R.id.imThumbnail)
+    ImageView imThumbnail;
 
     LinearLayoutManager linearLayoutManager;
     TradeAdapter adapter;
     List<Trade> names = new ArrayList<>();
     String itemId;
 
+    Realm mRealm;
+    LocationService locationService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,9 +118,10 @@ public class PriceCompareActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
+
+        mRealm = RealmManager.open();
+        locationService = RealmManager.createLocationService();
         setUpFirebaseListener();
-
-
     }
 
 
@@ -121,7 +132,8 @@ public class PriceCompareActivity extends AppCompatActivity {
                 Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
                 Trade item = dataSnapshot.getValue(Trade.class);
                 adapter.add(item);
-
+                    Toast.makeText(PriceCompareActivity.this, "Buu", Toast.LENGTH_SHORT).show();
+                    Glide.with(getBaseContext()).load(item.getFullPicture()).into(imThumbnail);
             }
 
             @Override
@@ -163,5 +175,11 @@ public class PriceCompareActivity extends AppCompatActivity {
             }
         };
         Database.getUpdates(itemId).addChildEventListener(childEventListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RealmManager.close();
     }
 }

@@ -7,9 +7,19 @@ import java.util.List;
  */
 
 public class TrackedAttempt {
+    String name;
     String id;
     double price;
     List<String> trackedPlaces;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getId() {
         return id;

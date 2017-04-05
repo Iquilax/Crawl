@@ -80,7 +80,7 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 trackPriceDialogFragment.show(fm, "fragment_track_price");
             }
         });
-//        Glide.with(context).load(trades.get(0).getFullPicture()).into(viewHolder.imThumbnail);
+        Glide.with(context).load(trades.get(0).getFullPicture()).into(viewHolder.imThumbnail);
 
     }
 
