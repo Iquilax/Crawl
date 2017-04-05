@@ -23,6 +23,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.HomePageAdapter;
 import com.iwlac.tracky.firebasemanager.Database;
@@ -66,9 +67,9 @@ public class MainActivity extends BaseActivity{
         initUI();
         initData();
 
-        RealmResults<Trade> trades = tradeService.loadAllAsync();
-        Log.d("Thienn" , trades.toString());
 
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d("Thien", "Refreshed token: " + refreshedToken);
     }
 
     private void initData() {

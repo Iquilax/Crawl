@@ -7,5 +7,6 @@ package com.iwlac.tracky.utility;
 public class IntentConstant {
 
     public static String EXTRA_PRODUCT_NAME = "ProductName";
+    public static String EXTRA_PRODUCT_CODE = "ProductCode";
     public static String EXTRA_PRODUCT_PRICE = "ProductPrice";
 }
