@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -37,7 +38,7 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private Context context;
     private ProductClickListener listener;
 
-    public TrendingProductAdapter(List<TrackedProduct> listTrackedProduct,ProductClickListener listener) {
+    public TrendingProductAdapter(List<TrackedProduct> listTrackedProduct, ProductClickListener listener) {
         this.listTrackedProduct = listTrackedProduct;
         this.listener = listener;
     }
@@ -68,19 +69,26 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void configureTrackedProductViewHolder(final TrendingProductViewHolder viewHolder, int position) {
-        final TrackedProduct item = listTrackedProduct.get(position);
-        viewHolder.tvName.setText(item.getTitle());
-        List<Trade> trades = new ArrayList<>(item.getUpdates().values());
-        viewHolder.tvPrice.setText(String.format("%1$,.0f", trades.get(0).getPrice())+ "₫");
-        viewHolder.btnTrack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = ((MainActivity) context).getSupportFragmentManager();
-                TrackPriceDialogFragment trackPriceDialogFragment = TrackPriceDialogFragment.newInstance(item.getId());
-                trackPriceDialogFragment.show(fm, "fragment_track_price");
-            }
-        });
-        Glide.with(context).load(trades.get(0).getFullPicture()).into(viewHolder.imThumbnail);
+
+        try {
+            final TrackedProduct item = listTrackedProduct.get(position);
+            viewHolder.tvName.setText(item.getTitle());
+            List<Trade> trades = new ArrayList<>(item.getUpdates().values());
+            viewHolder.tvPrice.setText(String.format("%1$,.0f", trades.get(0).getPrice()) + "₫");
+            viewHolder.btnTrack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fm = ((MainActivity) context).getSupportFragmentManager();
+                    TrackPriceDialogFragment trackPriceDialogFragment = TrackPriceDialogFragment.newInstance(item.getId());
+                    trackPriceDialogFragment.show(fm, "fragment_track_price");
+                }
+            });
+            Glide.with(context).load(trades.get(0).getFullPicture()).into(viewHolder.imThumbnail);
+        } catch (Exception e) {
+            Toast.makeText(context, "Not found", Toast.LENGTH_SHORT).show();
+//            return;
+        }
+
 
     }
 
@@ -93,6 +101,7 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         listTrackedProduct.add(name);
         this.notifyDataSetChanged();
     }
+
     public void addAll(List<TrackedProduct> name) {
         listTrackedProduct.addAll(name);
         this.notifyDataSetChanged();
@@ -103,7 +112,7 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.notifyDataSetChanged();
     }
 
-    public class TrendingProductViewHolder extends RecyclerView.ViewHolder{
+    public class TrendingProductViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvName)
         TextView tvName;
         @BindView(R.id.imThumbnail)
@@ -116,7 +125,7 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         public TrendingProductViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 

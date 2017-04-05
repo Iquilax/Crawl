@@ -14,10 +14,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiService {
-    private static ApiService mInstance = null;
-    public static ApiService getInstance() {
+    private static CrawlerAPI mInstance = null;
+    public static CrawlerAPI getInstance() {
         if (mInstance == null) {
-            mInstance = getRetrofit().create(ApiService.class);
+            mInstance = getRetrofit().create(CrawlerAPI.class);
         }
 
         return mInstance;
@@ -38,5 +38,6 @@ public class ApiService {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
+
 
 }

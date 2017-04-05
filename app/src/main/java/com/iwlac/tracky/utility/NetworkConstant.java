@@ -5,5 +5,5 @@ package com.iwlac.tracky.utility;
  */
 
 public class NetworkConstant {
-    public static String API_BASE_URL = "";
+    public static String API_BASE_URL = "http://smodule.azurewebsites.net/home/";
 }

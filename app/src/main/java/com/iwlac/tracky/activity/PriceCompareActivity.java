@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -72,6 +73,8 @@ public class PriceCompareActivity extends AppCompatActivity {
     FloatingActionButton btnTrack;
     @BindView(R.id.imThumbnail)
     ImageView imThumbnail;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     LinearLayoutManager linearLayoutManager;
     TradeAdapter adapter;
@@ -80,13 +83,17 @@ public class PriceCompareActivity extends AppCompatActivity {
 
     Realm mRealm;
     LocationService locationService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_price_compare);
         ButterKnife.bind(this);
+
+
         linearLayoutManager = new LinearLayoutManager(getBaseContext());
         rvTrade.setLayoutManager(linearLayoutManager);
+        toolbar.setTitle("Iphone 6");
         itemId = getIntent().getStringExtra(EXTRA_PRODUCT_CODE);
         adapter = new TradeAdapter(names, new ProductClickListener() {
             @Override
@@ -104,17 +111,17 @@ public class PriceCompareActivity extends AppCompatActivity {
                 editNameDialogFragment.show(fm, "fragment_track_price");
             }
         });
-        rvTrade.addOnScrollListener(new RecyclerView.OnScrollListener(){
+        rvTrade.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-                if (dy > 0 ||dy<0 && btnTrack.isShown())
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0 || dy < 0 && btnTrack.isShown())
                     btnTrack.hide();
             }
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 
-                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     btnTrack.show();
                 }
                 super.onScrollStateChanged(recyclerView, newState);
@@ -127,15 +134,14 @@ public class PriceCompareActivity extends AppCompatActivity {
     }
 
 
-    private void setUpFirebaseListener(){
+    private void setUpFirebaseListener() {
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
                 Trade item = dataSnapshot.getValue(Trade.class);
                 adapter.add(item);
-                    Toast.makeText(PriceCompareActivity.this, "Buu", Toast.LENGTH_SHORT).show();
-                    Glide.with(getBaseContext()).load(item.getFullPicture()).into(imThumbnail);
+                Glide.with(getBaseContext()).load(item.getFullPicture()).into(imThumbnail);
             }
 
             @Override
