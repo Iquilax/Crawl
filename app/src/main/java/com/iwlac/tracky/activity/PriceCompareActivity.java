@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -85,6 +86,7 @@ public class PriceCompareActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_price_compare);
         ButterKnife.bind(this);
+
         linearLayoutManager = new LinearLayoutManager(getBaseContext());
         rvTrade.setLayoutManager(linearLayoutManager);
         itemId = getIntent().getStringExtra(EXTRA_PRODUCT_CODE);

@@ -1,6 +1,7 @@
 package com.iwlac.tracky.activity;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -37,11 +38,14 @@ import com.iwlac.tracky.entity.Trade;
 import com.iwlac.tracky.entity.Updates;
 import com.iwlac.tracky.entity.service.TradeService;
 import com.iwlac.tracky.realm.RealmManager;
+import com.iwlac.tracky.utility.IntentConstant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmResults;
+
+import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_CODE;
 
 public class MainActivity extends BaseActivity{
     @BindView(R.id.vpHome)
@@ -57,7 +61,17 @@ public class MainActivity extends BaseActivity{
     private Realm mRealm;
     private TradeService tradeService;
 
+    private String productId;
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        processIntent(intent);
+    };
+
+    private void processIntent(Intent intent){
+        productId = intent.getStringExtra(EXTRA_PRODUCT_CODE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,28 +80,13 @@ public class MainActivity extends BaseActivity{
         ButterKnife.bind(this);
         initUI();
         initData();
-        //Init Realm
-        mRealm = RealmManager.open();
 
-        //Create a service
-        tradeService = RealmManager.createTradeService();
-
-        //Create
-        Trade trade = new Trade();
-                trade.setId("271728");
-                trade.setPrice(1020);
-        tradeService.save(trade);
-
-        //Search
-        Trade trade1 = (Trade) tradeService.findTradeById("271729");
-
-        //Remove
-//        tradeService.remove(trade1);
-
-
-
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d("Thien", "Refreshed token: " + refreshedToken);
+        processIntent(getIntent());
+        if (productId!=null && !productId.isEmpty()){
+            Intent intent = new Intent(this, PriceCompareActivity.class);
+            intent.putExtra(EXTRA_PRODUCT_CODE, productId);
+            startActivity(intent);
+        }
     }
 
     private void initData() {
