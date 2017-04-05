@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.activity.PriceCompareActivity;
 import com.iwlac.tracky.adapter.TrendingProductAdapter;
+import com.iwlac.tracky.models.CrawlResponse;
 import com.iwlac.tracky.networks.ApiService;
 import com.iwlac.tracky.networks.CrawlerAPI;
 
@@ -57,17 +59,18 @@ public class BrowseProductFragment extends Fragment {
         btnCrawl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crawlerAPI.getProductID(etName.getText().toString()).enqueue(new Callback<String>() {
+                crawlerAPI.getProductID(etName.getText().toString()).enqueue(new Callback<CrawlResponse>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<CrawlResponse> call, Response<CrawlResponse> response) {
                         Intent i = new Intent(getContext(), PriceCompareActivity.class);
-                        i.putExtra(EXTRA_PRODUCT_CODE, response.body());
+                        i.putExtra(EXTRA_PRODUCT_CODE, response.body().getName());
+                        Toast.makeText(getContext(), response.body().getName(), Toast.LENGTH_SHORT).show();
                         startActivity(i);
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-
+                    public void onFailure(Call<CrawlResponse> call, Throwable t) {
+                        Toast.makeText(getContext(), "Some error occurs", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

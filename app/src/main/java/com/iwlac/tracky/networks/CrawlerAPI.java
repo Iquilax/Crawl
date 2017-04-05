@@ -1,5 +1,7 @@
 package com.iwlac.tracky.networks;
 
+import com.iwlac.tracky.models.CrawlResponse;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -10,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface CrawlerAPI {
     @GET("getProducts")
-    Call<String> getProductID(@Query("productName") String name);
+    Call<CrawlResponse> getProductID(@Query("productName") String name);
 }
