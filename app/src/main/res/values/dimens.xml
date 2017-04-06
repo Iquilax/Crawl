@@ -11,5 +11,5 @@
     <dimen name="indicator_height">1dp</dimen>
 
     <dimen name="product_detail_image_min_height">200dp</dimen>
-    <dimen name="hot_product_image">160dp</dimen>
+    <dimen name="hot_product_image">80dp</dimen>
 </resources>

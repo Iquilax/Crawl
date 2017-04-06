@@ -25,7 +25,9 @@ import com.iwlac.tracky.entity.Trade;
 import com.iwlac.tracky.entity.service.TrackedAttemptService;
 import com.iwlac.tracky.entity.service.TradeService;
 import com.iwlac.tracky.firebasemanager.Database;
+import com.iwlac.tracky.models.Products;
 import com.iwlac.tracky.models.TrackedAttempt;
+import com.iwlac.tracky.models.TrackedProduct;
 import com.iwlac.tracky.realm.RealmManager;
 
 import butterknife.BindView;
@@ -44,9 +46,10 @@ public class TrackPriceDialogFragment extends DialogFragment {
 
     private Realm mRealm;
     private String itemId;
-    private TrackedAttemptService trackedAttemptService =RealmManager.createTrackedAttemptService();
+    private TrackedAttemptService trackedAttemptService = RealmManager.createTrackedAttemptService();
 
     public TrackPriceDialogFragment() {
+        mRealm = RealmManager.open();
         // Required empty public constructor
     }
 
@@ -91,7 +94,8 @@ public class TrackPriceDialogFragment extends DialogFragment {
                     mRealm = RealmManager.open();
                     //Create
                     com.iwlac.tracky.entity.TrackedAttempt attempt = new com.iwlac.tracky.entity.TrackedAttempt();
-                    attempt.setId(FirebaseInstanceId.getInstance().getToken());
+                    attempt.setId(itemId);
+                    attempt.setTokenId(FirebaseInstanceId.getInstance().getToken());
                     attempt.setPrice(Double.parseDouble(etPrice.getText().toString()));
                     trackedAttemptService.save(attempt);
                     dismiss();

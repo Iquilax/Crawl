@@ -19,15 +19,18 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.iwlac.tracky.activity.MainActivity;
 import com.iwlac.tracky.activity.PriceCompareActivity;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.TrackedProductAdapter;
 import com.iwlac.tracky.adapter.TradeAdapter;
+import com.iwlac.tracky.entity.service.TrackedAttemptService;
 import com.iwlac.tracky.firebasemanager.Database;
 import com.iwlac.tracky.models.TrackedAttempt;
 import com.iwlac.tracky.models.TrackedProduct;
 import com.iwlac.tracky.models.Trade;
+import com.iwlac.tracky.realm.RealmManager;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -46,13 +49,17 @@ import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_CODE;
 public class TrackedProductFragment extends Fragment {
     @BindView(R.id.rvTrackedProduct)
     RecyclerView rvTrackedProduct;
-
+    MainActivity parentActivity;
     LinearLayoutManager linearLayoutManager;
-    TrackedProductAdapter adapter;
+
     List<TrackedAttempt> tradeList = new ArrayList<>();
+    List<com.iwlac.tracky.entity.TrackedAttempt> eTrackAttemptList;
+    private TrackedAttemptService trackedAttemptService = RealmManager.createTrackedAttemptService();
+    List<TrackedProduct> fullProductList = new ArrayList<>();
 
     public TrackedProductFragment() {
         // Required empty public constructor
+        eTrackAttemptList = trackedAttemptService.loadAll();
     }
 
     public static TrackedProductFragment newInstance() {
@@ -69,8 +76,10 @@ public class TrackedProductFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tracked_product, container, false);
         ButterKnife.bind(this, view);
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        parentActivity = (MainActivity) getActivity();
         rvTrackedProduct.setLayoutManager(linearLayoutManager);
-        adapter = new TrackedProductAdapter(tradeList, new ProductClickListener() {
+
+        parentActivity.trackedProductAdapter = new TrackedProductAdapter(tradeList, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getContext(),PriceCompareActivity.class);
@@ -78,7 +87,7 @@ public class TrackedProductFragment extends Fragment {
                 startActivity(i);
             }
         });
-        rvTrackedProduct.setAdapter(adapter);
+        rvTrackedProduct.setAdapter(parentActivity.trackedProductAdapter);
 
         setUpFirebaseListener();
         return view;
@@ -90,15 +99,15 @@ public class TrackedProductFragment extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d("BUU", "onChildAdded:" + dataSnapshot.getKey());
                 TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
-                if (product.getTrackedAttempses() != null){
-                    for (TrackedAttempt attempt: product.getTrackedAttempses()
-                            ) {
-                        if (attempt.getId().equals(FirebaseInstanceId.getInstance().getToken())){
-                            adapter.add(attempt);
-                        }
-
-                    }
-                }
+//                if (product.getTrackedAttempts() != null){
+//                    for (TrackedAttempt attempt: product.getTrackedAttempts().values()
+//                            ) {
+//                        if (attempt.getId().equals(FirebaseInstanceId.getInstance().getToken())){
+//                            parentActivity.trackedProductAdapter.add(attempt);
+//                        }
+//
+//                    }
+//                }
             }
 
             @Override

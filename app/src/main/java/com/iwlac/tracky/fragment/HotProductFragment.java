@@ -13,16 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
+import com.iwlac.tracky.activity.MainActivity;
 import com.iwlac.tracky.activity.PriceCompareActivity;
 import com.iwlac.tracky.adapter.TrendingProductAdapter;
 import com.iwlac.tracky.firebasemanager.Database;
+import com.iwlac.tracky.models.TrackedAttempt;
 import com.iwlac.tracky.models.TrackedProduct;
+import com.iwlac.tracky.models.Trade;
 
 import org.parceler.Parcel;
 import org.parceler.Parcels;
@@ -88,6 +92,21 @@ public class HotProductFragment extends Fragment{
                 TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
                 product.setId(dataSnapshot.getKey());
                 adapter.add(product);
+                ((MainActivity)getActivity()).addProduct(product);
+                if (product.getTrackedAttempts() != null){
+                    for (TrackedAttempt attempt: product.getTrackedAttempts().values()
+                            ) {
+                        if (attempt.getId().equals(FirebaseInstanceId.getInstance().getToken())){
+                            if ( ((MainActivity)getActivity()).trackedProductAdapter != null ){
+                                Trade bestDeal = product.getCheapest();
+                                attempt.setBestPrice(bestDeal.getPrice());
+                                attempt.setBestPricePlaces(bestDeal.getTrackedPlaces());
+                                attempt.setName(product.getTitle());
+                            ((MainActivity)getActivity()).trackedProductAdapter.add(attempt);}
+                        }
+
+                    }
+                }
             }
 
             @Override

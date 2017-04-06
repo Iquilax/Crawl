@@ -53,7 +53,8 @@ public class RealmManager {
 
     private static void checkForOpenRealm() {
         if (mRealm == null || mRealm.isClosed()) {
-            throw new IllegalStateException("RealmManager: Realm is closed, call open() method first");
+            mRealm = RealmManager.open();
+            //throw new IllegalStateException("RealmManager: Realm is closed, call open() method first");
         }
     }
 }

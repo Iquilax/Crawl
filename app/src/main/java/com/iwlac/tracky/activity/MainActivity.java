@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.iwlac.tracky.R;
 import com.iwlac.tracky.adapter.HomePageAdapter;
+import com.iwlac.tracky.adapter.TrackedProductAdapter;
 import com.iwlac.tracky.firebasemanager.Database;
 import com.iwlac.tracky.fragment.TrackPriceDialogFragment;
 import com.iwlac.tracky.models.Products;
@@ -57,9 +58,10 @@ public class MainActivity extends BaseActivity{
     private int[] tabColors;
     private AHBottomNavigationAdapter navigationAdapter;
     private HomePageAdapter adapter;
-
+    public TrackedProductAdapter trackedProductAdapter;
     private Realm mRealm;
     private TradeService tradeService;
+    private List<TrackedProduct> firebaseProducts = new ArrayList<>();
 
     private String productId;
 
@@ -128,5 +130,12 @@ public class MainActivity extends BaseActivity{
     protected void onDestroy() {
         super.onDestroy();
         RealmManager.close();
+    }
+
+    public void addProduct(TrackedProduct product){
+        firebaseProducts.add(product);
+    }
+    public List<TrackedProduct> getAllProduct(){
+        return firebaseProducts;
     }
 }
