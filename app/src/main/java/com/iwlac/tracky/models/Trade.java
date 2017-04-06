@@ -18,8 +18,17 @@ public class Trade {
     String fullPicture;
     String id;
     String trackPlaceName;
+    String productName;
 
     public Trade() {
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getFullPicture() {
