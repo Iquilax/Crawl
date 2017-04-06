@@ -64,8 +64,15 @@ public class TradeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         Trade item = listTrackedProduct.get(position);
         viewHolder.tvTitle.setText(item.getDescription());
         viewHolder.tvPrice.setText(String.format("%1$,.0f", item.getPrice()) + "₫");
-        viewHolder.tvGroup.setText("Phones & Gadgets");
 
+        Boolean isChotot = item.getTrackedPlaces().equals("CT");
+        String place = isChotot ? "Chotot Marketplace" : "Facebook marketplace pages";
+        viewHolder.tvGroup.setText(place);
+        if (isChotot){
+            viewHolder.ivLogo.setImageResource(R.drawable.logo_chotot);
+        } else {
+            viewHolder.ivLogo.setImageResource(R.drawable.logo_facebook);
+        }
     }
 
     @Override
@@ -94,6 +101,8 @@ public class TradeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         TextView tvPrice;
         @BindView(R.id.tvTitle)
         TextView tvTitle;
+        @BindView(R.id.imLogo)
+        ImageView ivLogo;
 
         public TradeViewHolder(View itemView) {
             super(itemView);

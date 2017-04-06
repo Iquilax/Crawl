@@ -93,7 +93,7 @@ public class PriceCompareActivity extends AppCompatActivity {
 
         linearLayoutManager = new LinearLayoutManager(getBaseContext());
         rvTrade.setLayoutManager(linearLayoutManager);
-        toolbar.setTitle("Iphone 6");
+        toolbar.setTitle("");
         itemId = getIntent().getStringExtra(EXTRA_PRODUCT_CODE);
         adapter = new TradeAdapter(names, new ProductClickListener() {
             @Override
