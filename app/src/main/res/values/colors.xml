@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#E64A19</color>
     <color name="colorAccent">#C70039</color>
     <color name="priceColor">#191919</color>
+    <color name="colorPrimaryFragment">#80F8B195</color>
     <color name="pallet0">#FBE9E7</color>
     <color name="pallet1">#F8B195</color>
     <color name="pallet2">#F67280</color>

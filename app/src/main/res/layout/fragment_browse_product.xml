@@ -1,38 +1,55 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary"
-    android:padding="16dp"
-    tools:context="com.iwlac.tracky.fragment.BrowseProductFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ImageView
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:src="@mipmap/ic_launcher"/>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/pallet4"
-        android:layout_marginTop="20dp"
-        android:text="Product Name:" />
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context="com.iwlac.tracky.fragment.BrowseProductFragment">
 
-    <EditText
-        android:id="@+id/etName"
+        <!-- TODO: Update blank fragment layout -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Product Name:"
+            android:textColor="@color/pallet4" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:id="@+id/btnCrawl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pallet2"
+            android:text="Look up"
+            android:textColor="@color/pallet5" />
+
+
+    </LinearLayout>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:visibility="invisible"
+        android:id="@+id/loading_screen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryFragment"
+        android:src="@drawable/loading_eye" />
 
+</RelativeLayout>
 
-    <Button
-        android:id="@+id/btnCrawl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/pallet2"
-        android:textColor="@color/pallet5"
-        android:text="Look up"/>
-
-</LinearLayout>

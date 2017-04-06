@@ -4,6 +4,9 @@ package com.iwlac.tracky.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import com.iwlac.tracky.ProductClickListener;
 import com.iwlac.tracky.R;
+import com.iwlac.tracky.activity.MainActivity;
 import com.iwlac.tracky.activity.PriceCompareActivity;
 import com.iwlac.tracky.adapter.TrendingProductAdapter;
 import com.iwlac.tracky.models.CrawlResponse;
@@ -23,6 +27,7 @@ import com.iwlac.tracky.networks.CrawlerAPI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,6 +42,8 @@ public class BrowseProductFragment extends Fragment {
     EditText etName;
     @BindView(R.id.btnCrawl)
     Button btnCrawl;
+    @BindView(R.id.loading_screen)
+    GifImageView loading;
     CrawlerAPI crawlerAPI = ApiService.getInstance();
 
     public BrowseProductFragment() {
@@ -59,17 +66,18 @@ public class BrowseProductFragment extends Fragment {
         btnCrawl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loading.setVisibility(View.VISIBLE);
                 crawlerAPI.getProductID(etName.getText().toString()).enqueue(new Callback<CrawlResponse>() {
                     @Override
                     public void onResponse(Call<CrawlResponse> call, Response<CrawlResponse> response) {
                         Intent i = new Intent(getContext(), PriceCompareActivity.class);
                         i.putExtra(EXTRA_PRODUCT_CODE, response.body().getName());
-                        Toast.makeText(getContext(), response.body().getName(), Toast.LENGTH_SHORT).show();
                         startActivity(i);
                     }
 
                     @Override
                     public void onFailure(Call<CrawlResponse> call, Throwable t) {
+                        loading.setVisibility(View.INVISIBLE);
                         Toast.makeText(getContext(), "Some error occurs", Toast.LENGTH_SHORT).show();
                     }
                 });

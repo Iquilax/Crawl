@@ -5,6 +5,13 @@
     android:background="@color/pallet1"
     tools:context="com.iwlac.tracky.fragment.HotProductFragment">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/loading_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/loading_eye"
+        android:background="@color/colorPrimary"
+        />
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvHotProduct"

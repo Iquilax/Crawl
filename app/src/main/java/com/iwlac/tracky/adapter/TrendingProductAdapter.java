@@ -85,7 +85,7 @@ public class TrendingProductAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             });
             Glide.with(context).load(trades.get(0).getFullPicture()).into(viewHolder.imThumbnail);
         } catch (Exception e) {
-            Toast.makeText(context, "Not found", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Not found", Toast.LENGTH_SHORT).show();
 //            return;
         }
 

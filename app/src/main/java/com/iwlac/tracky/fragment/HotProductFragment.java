@@ -36,6 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.droidsonroids.gif.GifImageView;
 
 import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_CODE;
 
@@ -45,6 +46,8 @@ import static com.iwlac.tracky.utility.IntentConstant.EXTRA_PRODUCT_CODE;
 public class HotProductFragment extends Fragment{
     @BindView(R.id.rvHotProduct)
     RecyclerView rvHotProduct;
+    @BindView(R.id.loading_screen)
+    GifImageView loadingScreen;
 
     LinearLayoutManager linearLayoutManager;
     TrendingProductAdapter adapter;
@@ -107,6 +110,8 @@ public class HotProductFragment extends Fragment{
 
                     }
                 }
+
+                loadingScreen.setVisibility(View.INVISIBLE);
             }
 
             @Override
