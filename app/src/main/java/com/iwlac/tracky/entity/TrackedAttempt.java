@@ -12,6 +12,8 @@ import io.realm.RealmObject;
 public class TrackedAttempt extends RealmObject {
 
     String id;
+    String tokenId;
+    String productName;
     double price;
     RealmList<TrackedPlace> trackedPlaces;
 
@@ -32,6 +34,22 @@ public class TrackedAttempt extends RealmObject {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public RealmList<TrackedPlace> getTrackedPlaces() {

@@ -11,6 +11,8 @@ public class TrackedAttempt {
     String id;
     double price;
     List<String> trackedPlaces;
+    double bestPrice;
+    String bestPricePlaces;
 
 
     public String getName() {
@@ -43,5 +45,21 @@ public class TrackedAttempt {
 
     public void setTrackedPlaces(List<String> trackedPlaces) {
         this.trackedPlaces = trackedPlaces;
+    }
+
+    public double getBestPrice() {
+        return bestPrice;
+    }
+
+    public void setBestPrice(double bestPrice) {
+        this.bestPrice = bestPrice;
+    }
+
+    public String getBestPricePlaces() {
+        return bestPricePlaces;
+    }
+
+    public void setBestPricePlaces(String bestPricePlaces) {
+        this.bestPricePlaces = bestPricePlaces;
     }
 }

@@ -4,21 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="1000dp"
-    android:minHeight="450dp"
+    android:minHeight="220dp"
     android:orientation="vertical"
+    android:background="@color/pallet1"
     android:padding="16dp"
     tools:context="com.iwlac.tracky.fragment.TrackPriceDialogFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/priceColor"
-        android:text="Track this product at" />
+        android:src="@mipmap/ic_launcher"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/pallet4"
+        android:text="Notice me when price drop to:" />
 
     <EditText
         android:id="@+id/etPrice"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"/>
@@ -28,6 +37,8 @@
         android:id="@+id/btnTrack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/pallet2"
+        android:textColor="@color/pallet5"
         android:text="Track"/>
 
 </LinearLayout>

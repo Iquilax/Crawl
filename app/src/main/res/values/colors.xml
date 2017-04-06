@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimary">#F8B195</color>
     <color name="colorPrimaryDark">#E64A19</color>
-    <color name="colorAccent">#3F51B5</color>
+    <color name="colorAccent">#C70039</color>
     <color name="priceColor">#191919</color>
+    <color name="pallet0">#FBE9E7</color>
+    <color name="pallet1">#F8B195</color>
+    <color name="pallet2">#F67280</color>
+    <color name="pallet3">#C06C84</color>
+    <color name="pallet4">#6C5B7B</color>
+    <color name="pallet5">#355C7D</color>
 
     <array name="tab_colors">
         <item name="tab_1">#455C65</item>

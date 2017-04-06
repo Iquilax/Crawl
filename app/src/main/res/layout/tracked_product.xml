@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="@android:color/transparent"
+    android:layout_height="100dp"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -10,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:backgroundTint="#8fff"
+        android:backgroundTint="@color/pallet0"
         card_view:contentPadding="8dp"
         android:layout_margin="4dp">
 
@@ -19,7 +18,6 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:background="@drawable/border"
                 android:id="@+id/imLogo"
                 android:layout_width="55dp"
                 android:layout_marginRight="5dp"
@@ -38,14 +36,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Mac book 2016"
-                    android:textColor="@color/priceColor"
-                    android:textSize="16sp" />
+                    android:textColor="@color/colorAccent"
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/tvChannel"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvTitle"
+                    android:textSize="14sp"
                     android:text="Group Face" />
             </LinearLayout>
 
@@ -56,7 +55,7 @@
                 android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:text="90000₫"
-                android:textColor="@color/priceColor"
+                android:textColor="@color/pallet4"
                 android:textSize="18sp" />
         </RelativeLayout>
 

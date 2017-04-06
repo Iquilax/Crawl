@@ -111,22 +111,22 @@ public class PriceCompareActivity extends AppCompatActivity {
                 editNameDialogFragment.show(fm, "fragment_track_price");
             }
         });
-        rvTrade.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 || dy < 0 && btnTrack.isShown())
-                    btnTrack.hide();
-            }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    btnTrack.show();
-                }
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-        });
+//        rvTrade.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                if (dy > 0 || dy < 0 && btnTrack.isShown())
+//                    btnTrack.hide();
+//            }
+//
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    btnTrack.show();
+//                }
+//                super.onScrollStateChanged(recyclerView, newState);
+//            }
+//        });
 
         mRealm = RealmManager.open();
         locationService = RealmManager.createLocationService();

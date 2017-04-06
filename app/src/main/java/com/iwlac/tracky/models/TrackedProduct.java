@@ -17,7 +17,7 @@ public class TrackedProduct{
     String id;
     String title ;
     List<String> tags ;
-    List<TrackedAttempt> trackedAttempses ;
+    HashMap<String, TrackedAttempt> trackedAttempts ;
     public HashMap<String,Trade> updates;
 
     public TrackedProduct() {
@@ -31,12 +31,12 @@ public class TrackedProduct{
         this.id = id;
     }
 
-    public List<TrackedAttempt> getTrackedAttempses() {
-        return trackedAttempses;
+    public HashMap<String, TrackedAttempt> getTrackedAttempts() {
+        return trackedAttempts;
     }
 
-    public void setTrackedAttempses(List<TrackedAttempt> trackedAttempses) {
-        this.trackedAttempses = trackedAttempses;
+    public void setTrackedAttempts(HashMap<String, TrackedAttempt> trackedAttempts) {
+        this.trackedAttempts = trackedAttempts;
     }
 
     public String getTitle() {
@@ -59,8 +59,11 @@ public class TrackedProduct{
         return updates;
     }
 
-    public void getCheapest(){
-
+    public Trade getCheapest(){
+        if (updates == null || updates.values().size() == 0){
+            return null;
+        }
+        return (Trade)(updates.values().toArray()[0]);
     }
 
     public void setUpdates(HashMap<String, Trade> updates) {
