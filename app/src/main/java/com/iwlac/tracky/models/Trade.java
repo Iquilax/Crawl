@@ -17,6 +17,7 @@ public class Trade {
     String lastUpdate;
     String fullPicture;
     String id;
+    String trackPlaceName;
 
     public Trade() {
     }
@@ -75,5 +76,13 @@ public class Trade {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTrackPlaceName() {
+        return trackPlaceName;
+    }
+
+    public void setTrackPlaceName(String trackPlaceName) {
+        this.trackPlaceName = trackPlaceName;
     }
 }
