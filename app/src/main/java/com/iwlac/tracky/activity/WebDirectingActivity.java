@@ -18,6 +18,6 @@ public class WebDirectingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_directing);
         ButterKnife.bind(this);
-        wvTrade.loadUrl("https://www.facebook.com/groups/193618214469008/permalink/196896124141217/?sale_post_id=196896124141217&comment_id=196988147465348&notif_t=group_comment&notif_id=1490496509626572");
+        wvTrade.loadUrl(getIntent().getStringExtra("url"));
     }
 }
