@@ -12,6 +12,18 @@
     <color name="pallet4">#6C5B7B</color>
     <color name="pallet5">#355C7D</color>
 
+    <!--<color name="colorPrimary">#F8B195</color>-->
+    <!--<color name="colorPrimaryDark">#E64A19</color>-->
+    <!--<color name="colorAccent">#C70039</color>-->
+    <!--<color name="priceColor">#191919</color>-->
+    <!--<color name="colorPrimaryFragment">#80F8B195</color>-->
+    <!--<color name="pallet0">#d45942</color>-->
+    <!--<color name="pallet1">#393838</color>-->
+    <!--<color name="pallet2">#F67280</color>-->
+    <!--<color name="pallet3">#C06C84</color>-->
+    <!--<color name="pallet4">#6C5B7B</color>-->
+    <!--<color name="pallet5">#355C7D</color>-->
+
     <array name="tab_colors">
         <item name="tab_1">#455C65</item>
         <item name="tab_2">#00886A</item>

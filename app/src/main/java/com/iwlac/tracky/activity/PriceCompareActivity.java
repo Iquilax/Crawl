@@ -99,6 +99,7 @@ public class PriceCompareActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getBaseContext(), WebDirectingActivity.class);
+                i.putExtra("url", names.get(position).getUrl());
                 startActivity(i);
             }
         });
