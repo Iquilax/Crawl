@@ -83,7 +83,7 @@ public class TrackedProductFragment extends Fragment {
             @Override
             public void onItemClick(View v, int position) {
                 Intent i = new Intent(getContext(),PriceCompareActivity.class);
-                i.putExtra(EXTRA_PRODUCT_CODE,tradeList.get(position).getId());
+                i.putExtra(EXTRA_PRODUCT_CODE,tradeList.get(position).getProductId());
                 startActivity(i);
             }
         });

@@ -77,8 +77,20 @@ public class BrowseProductFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<CrawlResponse> call, Throwable t) {
-                        loading.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getContext(), "Some error occurs", Toast.LENGTH_SHORT).show();
+                        crawlerAPI.getProductID(etName.getText().toString()).enqueue(new Callback<CrawlResponse>() {
+                            @Override
+                            public void onResponse(Call<CrawlResponse> call, Response<CrawlResponse> response) {
+                                Intent i = new Intent(getContext(), PriceCompareActivity.class);
+                                i.putExtra(EXTRA_PRODUCT_CODE, response.body().getName());
+                                startActivity(i);
+                            }
+
+                            @Override
+                            public void onFailure(Call<CrawlResponse> call, Throwable t) {
+                                loading.setVisibility(View.INVISIBLE);
+                                Toast.makeText(getContext(), "Some error occurs", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }

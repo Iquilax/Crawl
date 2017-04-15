@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Tracky.iml" filepath="$PROJECT_DIR$/Tracky.iml" />
       <module fileurl="file://$PROJECT_DIR$/Trakky.iml" filepath="$PROJECT_DIR$/Trakky.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

@@ -95,17 +95,24 @@ public class HotProductFragment extends Fragment{
                 TrackedProduct product = dataSnapshot.getValue(TrackedProduct.class);
                 product.setId(dataSnapshot.getKey());
                 adapter.add(product);
-                ((MainActivity)getActivity()).addProduct(product);
+                if (getActivity() != null){
+                    ((MainActivity)getActivity()).addProduct(product);
+                }
+
                 if (product.getTrackedAttempts() != null){
                     for (TrackedAttempt attempt: product.getTrackedAttempts().values()
                             ) {
                         if (attempt.getId().equals(FirebaseInstanceId.getInstance().getToken())){
                             if ( ((MainActivity)getActivity()).trackedProductAdapter != null ){
                                 Trade bestDeal = product.getCheapest();
-                                attempt.setBestPrice(bestDeal.getPrice());
-                                attempt.setBestPricePlaces(bestDeal.getTrackedPlaces());
-                                attempt.setName(product.getTitle());
-                            ((MainActivity)getActivity()).trackedProductAdapter.add(attempt);}
+                                if (bestDeal != null){
+                                    attempt.setBestPrice(bestDeal.getPrice());
+                                    attempt.setBestPricePlaces(bestDeal.getTrackedPlaces());
+                                    attempt.setName(product.getTitle());
+                                    attempt.setProductId(product.getId());
+                                    ((MainActivity)getActivity()).trackedProductAdapter.add(attempt);
+                                }
+                                }
                         }
 
                     }

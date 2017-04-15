@@ -98,9 +98,11 @@ public class PriceCompareActivity extends AppCompatActivity {
         adapter = new TradeAdapter(names, new ProductClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Intent i = new Intent(getBaseContext(), WebDirectingActivity.class);
-                i.putExtra("url", names.get(position).getUrl());
-                startActivity(i);
+//                Intent i = new Intent(getBaseContext(), WebDirectingActivity.class);
+//                i.putExtra("url", names.get(position).getUrl());
+//                startActivity(i);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(names.get(position).getUrl()));
+                startActivity(browserIntent);
             }
         });
         rvTrade.setAdapter(adapter);
@@ -112,22 +114,22 @@ public class PriceCompareActivity extends AppCompatActivity {
                 editNameDialogFragment.show(fm, "fragment_track_price");
             }
         });
-//        rvTrade.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                if (dy > 0 || dy < 0 && btnTrack.isShown())
-//                    btnTrack.hide();
-//            }
-//
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//
-//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-//                    btnTrack.show();
-//                }
-//                super.onScrollStateChanged(recyclerView, newState);
-//            }
-//        });
+        rvTrade.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0 || dy < 0 && btnTrack.isShown())
+                    btnTrack.hide();
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    btnTrack.show();
+                }
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
 
         mRealm = RealmManager.open();
         locationService = RealmManager.createLocationService();

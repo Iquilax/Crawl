@@ -13,7 +13,15 @@ public class TrackedAttempt {
     List<String> trackedPlaces;
     double bestPrice;
     String bestPricePlaces;
+    String productId;
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
     public String getName() {
         return name;

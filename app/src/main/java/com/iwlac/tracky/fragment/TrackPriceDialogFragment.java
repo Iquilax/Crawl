@@ -98,6 +98,9 @@ public class TrackPriceDialogFragment extends DialogFragment {
                     attempt.setTokenId(FirebaseInstanceId.getInstance().getToken());
                     attempt.setPrice(Double.parseDouble(etPrice.getText().toString()));
                     trackedAttemptService.save(attempt);
+                    Intent intent = getActivity().getIntent();
+                    getActivity().finish();
+                    startActivity(intent);
                     dismiss();
                 } else {
                     Snackbar.make(v,"Some error occur", Snackbar.LENGTH_LONG).show();
